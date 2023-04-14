@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const plugin = require('tailwindcss/plugin')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -14,13 +15,28 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                estonia: ['Estonia', ...defaultTheme.fontFamily.sans],
             },
             backgroundImage: {
                 'frontPageBg': "url('/resources/js/Images/jakob-braun-vpsPRd_rz-A-unsplash.jpg')",
 
-              }
+              },
+              textShadow: {
+                sm: '0 1px 2px var(--tw-shadow-color)',
+                DEFAULT: '0px 4px 4px var(--tw-shadow-color)',
+                lg: '0 8px 16px var(--tw-shadow-color)',
+              },
         },
     },
 
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), plugin(function ({ matchUtilities, theme }) {
+        matchUtilities(
+          {
+            'text-shadow': (value) => ({
+              textShadow: value,
+            }),
+          },
+          { values: theme('textShadow') }
+        )
+      }),],
 };
