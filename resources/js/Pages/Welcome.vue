@@ -11,7 +11,7 @@ defineProps({
 
 <template class="bg">
     <Head title="Welcome" />
-    <div class="relative flex grid justify-items-center items-center min-h-screen bg-dots-darker bg-center bg-orange-300 selection:bg-red-500 selection:text-white">
+    <div class="relative bg-frontPageBg grid justify-items-center items-center min-h-screen bg-dots-darker bg-center bg-orange-300 selection:bg-red-500 selection:text-white">
         <div v-if="canLogin" class="w-full rounded-b-[32px] bg-orange-200 sm:fixed  sm:top-0 sm:right-0 p-6 text-right">
             <Link v-if="$page.props.auth.user" :href="route('dashboard')" class="font-semibold text-orange-900  dark:text-orange-900 text-[40px]">Dashboard</Link>
 

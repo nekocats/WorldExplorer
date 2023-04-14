@@ -15,6 +15,10 @@ module.exports = {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                'frontPageBg': "url('/resources/js/Images/jakob-braun-vpsPRd_rz-A-unsplash.jpg')",
+
+              }
         },
     },
 
