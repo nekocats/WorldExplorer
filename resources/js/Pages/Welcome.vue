@@ -22,7 +22,7 @@ defineProps({
             </template>
         </div>
         <div>
-            <Link :href="route('map')" class="bg-orange-200  text-shadow shadow-black font-estonia text-7xl text-orange-900  font-bold py-2 px-60 rounded-full">Play</Link> <br>
+            <Link :href="route('map')" class="bg-orange-200 bg-opacity-25 text-shadow shadow-black font-estonia text-7xl text-orange-900  font-bold py-2 px-60 rounded-full">Play</Link> <br>
         </div>
     </div>
 </template>
