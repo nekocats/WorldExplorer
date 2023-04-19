@@ -20,7 +20,7 @@
                 <Link v-if="canRegister" :href="route('register')" class="ml-4 font-semibold  text-[40px] text-gray-200  dark:text-gray-200 ">Register</Link>
             </template>
         </div>
-    <div class="flex justify-center items-center min-h-screen">
+    <div class="flex justify-center items-center min-h-screen whitespace-nowrap">
         <div class="backdrop-blur-md 	py-4 px-0.5 rounded-full">
             <Link :href="route('quiz')" class="bg-gray-200 backdrop-blur-3xl bg-opacity-25 text-shadow shadow-black font-estonia text-7xl text-gray-200 py-2 px-60 rounded-full font-bold ">Quiz</Link> <br>
         </div>
