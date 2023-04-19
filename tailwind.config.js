@@ -16,10 +16,7 @@ module.exports = {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 estonia: ['Estonia', ...defaultTheme.fontFamily.sans],
-            },
-            backgroundImage: {
-                'frontPageBg': "url('/resources/js/Images/bg2.jpg')",
-
+            
             },
             textShadow: {
                 sm: '0 1px 2px var(--tw-shadow-color)',
