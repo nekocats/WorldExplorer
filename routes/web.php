@@ -27,6 +27,9 @@ Route::get('/map', function () {
     return Inertia::render('Map');
 })->name('map');
 
+Route::get('/gameselect', function () {
+    return Inertia::render('GameSelect');
+})->name('gameselect');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

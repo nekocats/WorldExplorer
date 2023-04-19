@@ -1,37 +1,80 @@
+<script setup>
+    import { useForm } from '@inertiajs/vue3'
+    import DangerButton from '../Components/DangerButton.vue';
+    import EditForm from './Edit.vue'
+
+const props = defineProps({
+    markers: {
+        type: Object,
+        default: () => ({}),
+    },
+})
+console.log(props.markers)
+    const form = useForm({
+  name: null,
+  lat: null,
+  lng: null,
+  description: null
+})
+
+const formDel = useForm({});
+function mark(event) {
+    form.lat = event.latLng.lat()
+    form.lng = event.latLng.lng()
+
+  }
+function destroy(id) {
+    if (confirm("Are you sure you want to Delete")) {
+        formDel.delete(route('maps.destroy', id));
+    }
+}
+
+</script>
+
 <template>
-    <GMapMap
-        :center="center"
-        :zoom="7"
-        map-type-id="terrain"
-        style="width: 500px; height: 300px"
-    >
-      <GMapCluster>
-        <GMapMarker
-            :key="index"
-            v-for="(m, index) in markers"
-            :position="m.position"
-            :clickable="true"
-            :draggable="true"
-            @click="center=m.position"
-        />
-      </GMapCluster>
+
+    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="terrain" style="width: 100vw; height: 20rem" @click="mark">
+       <GMapMarker :key="marker.id" v-for="marker in markers" :position="{lat:marker.lat, lng:marker.lng}" :clickable="true"
+          @click="openMarker(marker.id)" >
+            <GMapInfoWindow
+            :closeclick="true"
+            @closeclick="openMarker(null)"
+            :opened="openedMarkerID === marker.id"
+        >
+          <div> <span>{{marker.name}}</span>
+            <p>{{marker.description}}</p>
+        </div>
+        <DangerButton @click="destroy(marker.id)">DELETE</DangerButton>
+        <EditForm :marker = marker></EditForm>
+        </GMapInfoWindow>
+          </GMapMarker>
+          <GMapMarker  :position="{lat:form.lat, lng:form.lng}">
+          </GMapMarker>
     </GMapMap>
+    <form @submit.prevent="form.post('/add-marker')">
+    <input type="text" v-model="form.name">
+    <input type="text" v-model="form.lat">
+    <input type="text" v-model="form.lng">
+    <input type="text" v-model="form.description">
+    <button type="submit" :disabled="form.processing">Submit</button>
+  </form>
+
   </template>
+
   <script>
-  export default {
-    name: 'App',
+    export default {
     data() {
       return {
-        center: {lat: 51.093048, lng: 6.842120},
-        markers: [
-          {
-            position: {
-              lat: 51.093048, lng: 6.842120
-            },
-          }
-          , // Along list of clusters
-        ]
-      }
+        openedMarkerID: null,
+        center: { lat: 58.2449205980223, lng: 22.496933575606914 },
+
+      };
+    },
+    methods: {
+      openMarker(id) {
+         this.openedMarkerID = id
+      },
+
     }
-  }
+  };
   </script>
