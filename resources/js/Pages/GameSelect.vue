@@ -14,13 +14,16 @@
         <div v-if="canLogin" class="w-full rounded-b-[32px] sm:fixed  sm:top-0 sm:right-0 p-6 text-right">
             <Link v-if="$page.props.auth.user" :href="route('dashboard')" class="font-semibold text-shadow shadow-black text-[#7E4400] font-raleway text-pink-400 dark:text-pink-400 text-[40px]">Dashboard</Link>
         </div>
-    <div class="flex justify-center items-center min-h-screen whitespace-nowrap">
-        <div class="backdrop-blur-md 	py-4 px-0.5 rounded-full">
-            <Link :href="route('quiz')" class="bg-pink-400 backdrop-blur-3xl bg-opacity-25 text-shadow shadow-black font-raleway text-7xl text-pink-400 py-2 px-60 rounded-full font-bold ">Quiz</Link> <br>
+        <div class="flex justify-center p-2 items-center ">
+        <div class="backdrop-blur-md 	  rounded-full">
+            <Link :href="route('quiz')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-7xl text-pink-400 py-2 px-60 rounded-full font-bold ">Quiz</Link> <br>
         </div>
-        <div class="backdrop-blur-md	py-4 px-0.5 rounded-full">
-            <Link :href="route('map')" class="bg-pink-400 backdrop-blur-3xl	bg-opacity-25 text-shadow shadow-black font-raleway text-7xl text-pink-400 py-2 px-60 rounded-full font-bold ">Map Quiz</Link> <br>
+        <div class="p-2 rounded-full">
+            <Link :href="route('map')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-7xl text-pink-400 py-2 px-60 rounded-full font-bold ">Map Quiz</Link> <br>
         </div>
        </div>
+       <div class="p-2 rounded-full">
+            <Link :href="route('welcome')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-7xl text-pink-400 py-2 px-60 rounded-full font-bold ">Back</Link> <br>
+        </div>
     </div>
 </template>
