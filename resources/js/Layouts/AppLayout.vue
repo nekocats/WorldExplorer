@@ -48,9 +48,24 @@ const logout = () => {
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                <NavLink :href="route('welcome')" :active="route().current('welcome')">
+                                    Play
                                 </NavLink>
+<<<<<<< HEAD
+
+                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                    About
+                                </NavLink>
+
+                                <NavLink :href="route('profile.show')" :active="route().current('profile.show')">
+                                    Profile Management
+                                </NavLink>
+                                
+=======
+                                <NavLink :href="route('mapquizzes')" :active="route().current('mapquizzes')">
+                                    MapQuiz
+                                </NavLink>
+>>>>>>> 1a09a5d (carlos wanted)
                             </div>
                         </div>
 

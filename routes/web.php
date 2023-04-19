@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MapQuizController;
+use App\Models\MapQuiz;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,17 +24,22 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('welcome');
 Route::get('/map', function () {
     return Inertia::render('Map');
 })->name('map');
 
+
 Route::get('/gameselect', function () {
     return Inertia::render('GameSelect');
 })->name('gameselect');
-Route::get('/quiz', function () {
-    return Inertia::render('Quiz');
-})->name('quiz');
+
+Route::get('/mapquizzes', function () {
+    return Inertia::render('MapQuiz/Quizzes', [
+        'quizzes' => MapQuiz::all()
+    ]);
+})->name('mapquizzes');
+Route::resource('mapquiz',MapQuizController::class);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
