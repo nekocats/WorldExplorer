@@ -18,6 +18,7 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
-        "@fawmi/vue-google-maps": "0.9.67"
+        "@fawmi/vue-google-maps": "0.9.67",
+        "dotenv": "^16.0.3"
     }
 }
