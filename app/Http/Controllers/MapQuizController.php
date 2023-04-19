@@ -28,7 +28,16 @@ class MapQuizController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+        ]);
+       $mapquizzes = MapQuiz::create($validated);
+        if ($images = $request->file('images')) {
+            foreach ($images as $image) {
+                $mapquizzes->addMedia($image)->toMediaCollection('images');
+            }
+        }
     }
 
     /**

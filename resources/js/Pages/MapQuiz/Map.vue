@@ -8,13 +8,16 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    quiz: {
+        type: Object,
+        default: () => ({}),
+    },
 })
 console.log(props.markers)
     const form = useForm({
-  name: null,
+  question: null,
   lat: null,
   lng: null,
-  description: null
 })
 
 const formDel = useForm({});
@@ -52,10 +55,9 @@ function destroy(id) {
           </GMapMarker>
     </GMapMap>
     <form @submit.prevent="form.post('/add-marker')">
-    <input type="text" v-model="form.name">
+    <input type="text" v-model="form.question">
     <input type="text" v-model="form.lat">
     <input type="text" v-model="form.lng">
-    <input type="text" v-model="form.description">
     <button type="submit" :disabled="form.processing">Submit</button>
   </form>
 

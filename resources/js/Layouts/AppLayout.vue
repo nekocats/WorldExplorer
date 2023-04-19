@@ -51,6 +51,7 @@ const logout = () => {
                                 <NavLink :href="route('welcome')" :active="route().current('welcome')">
                                     Play
                                 </NavLink>
+<<<<<<< HEAD
 
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     About
@@ -60,6 +61,11 @@ const logout = () => {
                                     Profile Management
                                 </NavLink>
                                 
+=======
+                                <NavLink :href="route('mapquizzes')" :active="route().current('mapquizzes')">
+                                    MapQuiz
+                                </NavLink>
+>>>>>>> 1a09a5d (carlos wanted)
                             </div>
                         </div>
 

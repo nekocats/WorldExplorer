@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MapQuizController;
+use App\Models\MapQuiz;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -31,9 +33,19 @@ Route::get('/map', function () {
 Route::get('/gameselect', function () {
     return Inertia::render('GameSelect');
 })->name('gameselect');
+<<<<<<< HEAD
 Route::get('/quiz', function () {
     return Inertia::render('Quiz');
 })->name('quiz');
+=======
+
+Route::get('/mapquizzes', function () {
+    return Inertia::render('MapQuiz/Quizzes', [
+        'quizzes' => MapQuiz::all()
+    ]);
+})->name('mapquizzes');
+Route::resource('mapquiz',MapQuizController::class);
+>>>>>>> 1a09a5d (carlos wanted)
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

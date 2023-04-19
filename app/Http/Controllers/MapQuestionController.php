@@ -28,7 +28,19 @@ class MapQuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'question' => 'required|string|max:255',
+            'lat' => 'required',
+            'lng' => 'required',
+            'map_quiz_id' => 'required',
+
+        ]);
+       $mapquestion = MapQuestion::create($validated);
+        if ($images = $request->file('images')) {
+            foreach ($images as $image) {
+                $mapquestion->addMedia($image)->toMediaCollection('images');
+            }
+        }
     }
 
     /**
