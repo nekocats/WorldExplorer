@@ -28,7 +28,9 @@ Route::get('/', function () {
 Route::get('/map', function () {
     return Inertia::render('Map');
 })->name('map');
-
+Route::get('/quiz', function () {
+    return Inertia::render('Quiz');
+})->name('quiz');
 
 Route::get('/gameselect', function () {
     return Inertia::render('GameSelect');
