@@ -22,10 +22,11 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('welcome');
 Route::get('/map', function () {
     return Inertia::render('Map');
 })->name('map');
+
 
 Route::get('/gameselect', function () {
     return Inertia::render('GameSelect');
