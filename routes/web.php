@@ -41,7 +41,20 @@ Route::get('/mapquizzes', function () {
         'quizzes' => MapQuiz::all()
     ]);
 })->name('mapquizzes');
+
+Route::get('/quizmap', function () {
+    return Inertia::render('MapQuiz/Quizzes', [
+        'quizzes' => MapQuiz::all()
+    ]);
+})->name('quizmap');
+
+
+Route::get('/quiz', function () {
+    return Inertia::render('Quiz');
+})->name('quiz');
+
 Route::resource('mapquiz',MapQuizController::class);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

@@ -59,7 +59,6 @@ const logout = () => {
                                 <NavLink :href="route('profile.show')" :active="route().current('profile.show')">
                                     Profile Management
                                 </NavLink>
-                                
                                 <NavLink :href="route('mapquizzes')" :active="route().current('mapquizzes')">
                                     MapQuiz
                                 </NavLink>
