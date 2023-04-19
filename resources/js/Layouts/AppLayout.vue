@@ -60,7 +60,6 @@ const logout = () => {
                                     Profile Management
                                 </NavLink>
 
-
                                 <NavLink :href="route('mapquizzes')" :active="route().current('mapquizzes')">
                                     MapQuiz
                                 </NavLink>
@@ -204,8 +203,20 @@ const logout = () => {
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink :href="route('welcome')" :active="route().current('welcome')">
+                            Play
+                        </ResponsiveNavLink>
+
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
+                            About
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink :href="route('profile.show')" :active="route().current('profile.show')">
+                            Profile Management
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink :href="route('mapquizzes')" :active="route().current('mapquizzes')">
+                            MapQuiz
                         </ResponsiveNavLink>
                     </div>
 
