@@ -18,7 +18,7 @@ module.exports = {
                 estonia: ['Estonia', ...defaultTheme.fontFamily.sans],
             },
             backgroundImage: {
-                'frontPageBg': "url('/resources/js/Images/jakob-braun-vpsPRd_rz-A-unsplash.jpg')",
+                'frontPageBg': "url('/resources/js/Images/nadjib-br-51Ms-0PbCHo-unsplash.jpg')",
 
               },
               textShadow: {
