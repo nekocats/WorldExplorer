@@ -30,6 +30,9 @@ Route::get('/map', function () {
 Route::get('/gameselect', function () {
     return Inertia::render('GameSelect');
 })->name('gameselect');
+Route::get('/quiz', function () {
+    return Inertia::render('Quiz');
+})->name('quiz');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
