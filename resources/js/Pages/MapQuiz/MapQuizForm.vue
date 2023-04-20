@@ -1,6 +1,5 @@
 <script setup>
     import { useForm } from '@inertiajs/vue3'
-    import DangerButton from '../Components/DangerButton.vue';
     import EditForm from './Edit.vue'
 
 const props = defineProps({
@@ -48,7 +47,7 @@ function destroy(id) {
           <div> <span>{{marker.name}}</span>
             <p>{{marker.description}}</p>
         </div>
-        <DangerButton @click="destroy(marker.id)">DELETE</DangerButton>
+
         <EditForm :marker = marker></EditForm>
         </GMapInfoWindow>
           </GMapMarker>

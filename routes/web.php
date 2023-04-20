@@ -42,8 +42,8 @@ Route::get('/mapquizzes', function () {
     ]);
 })->name('mapquizzes');
 
-Route::get('/quizmap', function () {
-    return Inertia::render('MapQuiz/MapQuizForm.vue', [
+Route::get('/quizmap/{id}', function () {
+    return Inertia::render('MapQuiz/MapQuizForm', [
         'quiz' => MapQuiz::where('map_quiz_id')
     ]);
 })->name('quizmap');
