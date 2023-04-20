@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MapQuestionController;
 use App\Http\Controllers\MapQuizController;
 use App\Models\MapQuiz;
 use Illuminate\Foundation\Application;
@@ -42,13 +43,16 @@ Route::get('/mapquizzes', function () {
     ]);
 })->name('mapquizzes');
 
+Route::get('/choosemapquiz', [MapQuizController::class, 'index'])->middleware(['auth'])->name('choosequiz');
 
-Route::name('quizmap.')->group(function () {
+
+Route::name('quizmap.')->prefix('quizmap')->group(function () {
     Route::get('/{id}', function (string $id) {
         return Inertia::render('MapQuiz/MapQuizForm', [
             'quiz' => $id,
         ]);
     })->name('getQuiz');
+    Route::post('store', [MapQuestionController::class, 'store'])->name('store');
 });
 
 Route::get('/quiz', function () {
@@ -56,7 +60,8 @@ Route::get('/quiz', function () {
 })->name('quiz');
 
 Route::resource('mapquiz',MapQuizController::class);
-Route::resource('mapquestion',MapQuestionController::class);
+
+
 
 Route::middleware([
     'auth:sanctum',

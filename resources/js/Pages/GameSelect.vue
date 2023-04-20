@@ -19,7 +19,7 @@
             <Link :href="route('quiz')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-7xl text-pink-400 py-2 px-60 rounded-full font-bold ">Quiz</Link> <br>
         </div>
         <div class="p-2 rounded-full">
-            <Link :href="route('map')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-7xl text-pink-400 py-2 px-60 rounded-full font-bold ">Map Quiz</Link> <br>
+            <Link :href="route('choosequiz')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-7xl text-pink-400 py-2 px-60 rounded-full font-bold ">Map Quiz</Link> <br>
         </div>
        </div>
        <div class="p-2 rounded-full">
