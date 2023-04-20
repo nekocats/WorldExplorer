@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\MapQuizController;
-use App\Models\MapQuiz; 
+use App\Models\MapQuiz;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,18 +42,21 @@ Route::get('/mapquizzes', function () {
     ]);
 })->name('mapquizzes');
 
-Route::get('/quizmap/{id}', function () {
-    return Inertia::render('MapQuiz/MapQuizForm', [
-        'quiz' => MapQuiz::where('map_quiz_id')
-    ]);
-})->name('quizmap');
 
+Route::name('quizmap.')->group(function () {
+    Route::get('/{id}', function (string $id) {
+        return Inertia::render('MapQuiz/MapQuizForm', [
+            'quiz' => $id,
+        ]);
+    })->name('getQuiz');
+});
 
 Route::get('/quiz', function () {
     return Inertia::render('Quiz');
 })->name('quiz');
 
 Route::resource('mapquiz',MapQuizController::class);
+Route::resource('mapquestion',MapQuestionController::class);
 
 Route::middleware([
     'auth:sanctum',

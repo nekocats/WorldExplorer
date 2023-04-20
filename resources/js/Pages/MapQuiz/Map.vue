@@ -18,6 +18,7 @@ console.log(props.markers)
   question: null,
   lat: null,
   lng: null,
+  map_quiz_id: null,
 })
 
 const formDel = useForm({});

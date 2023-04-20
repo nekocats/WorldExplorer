@@ -37,7 +37,7 @@ const form = useForm({
 
         </div>
         <div class="flex flex-col pl-9 " :key="quiz.id" v-for="quiz in quizzes">
-            <Link class="text-white" :href="route('quizmap', quiz.id)" >{{ quiz.title }}</Link>
+            <Link class="text-white" :href="route('quizmap.getQuiz', quiz.id)" >{{ quiz.title }}</Link>
         </div>
 
     </AppLayout>
