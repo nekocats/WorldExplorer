@@ -46,10 +46,10 @@ class MapQuizController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MapQuiz $mapQuiz)
+    public function show(MapQuiz $mapQuiz, $id)
     {
         return Inertia::render('MapQuiz/PlayQuiz', [
-            'quiz' => MapQuiz::with('questions')->get()
+            'quiz' => MapQuiz::with('questions')->where('id', $id)->get()
         ]);
     }
 

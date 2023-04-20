@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "@fawmi/vue-google-maps": "0.9.67",
-        "dotenv": "^16.0.3"
+        "dotenv": "^16.0.3",
+        "haversine-distance": "^1.2.1"
     }
 }

@@ -1,5 +1,7 @@
 <script setup>
     import { useForm } from '@inertiajs/vue3'
+import { reactive, ref } from 'vue';
+import haversine from 'haversine-distance'
 
 const props = defineProps({
     quiz: {
@@ -7,12 +9,49 @@ const props = defineProps({
         default: () => ({}),
     },
 })
-console.log(props.quiz)
 
+const score = ref(0)
+console.log(props.quiz)
+const questions = reactive([])
+props.quiz[0].questions.forEach(element => {
+questions.push(element)
+});
+const qCount = questions.length
+const currentQ = ref({current: 0})
+console.log(currentQ.value.current)
+const a = ref({lat: questions[currentQ.value.current].lat, lng: questions[currentQ.value.current].lng})
+console.log(questions)
+const guess = ref({lat: null, lng: null})
+
+let gameOver = false
 
 function mark(event) {
-event.latLng.lat()
-event.latLng.lng()
+guess.value.lat = event.latLng.lat()
+guess.value.lng = event.latLng.lng()
+console.log(guess.value)
+console.log(a.value)
+const answer = ref(haversine(a.value, guess.value))
+console.log(answer.value)
+if (gameOver == false) {
+
+
+
+    if (gameOver == false) {
+        score.value = score.value + 5000
+    }
+    if (qCount == currentQ.value.current + 1) {
+        gameOver = true
+    }
+    if (qCount != currentQ.value.current + 1) {
+        currentQ.value.current++
+
+    }
+
+    a.value.lat = questions[currentQ.value.current].lat
+    a.value.lng = questions[currentQ.value.current].lng
+    console.log(currentQ.value.current)
+
+}
 
   }
 
@@ -22,23 +61,21 @@ event.latLng.lng()
 <template>
     <GuestLayout>
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="terrain" style="width: 100vw; height: 20rem" @click="mark">
-       <GMapMarker :key="marker.id" v-for="marker in markers" :position="{lat:marker.lat, lng:marker.lng}" :clickable="true"
+       <GMapMarker :position="{lat:guess.lat, lng:guess.lng}" :clickable="true"
           @click="openMarker(marker.id)" >
-            <GMapInfoWindow
-            :closeclick="true"
-            @closeclick="openMarker(null)"
-            :opened="openedMarkerID === marker.id"
-        >
-          <div> <span>{{marker.name}}</span>
-            <p>{{marker.description}}</p>
+
+          <div>
+
         </div>
 
-
-        </GMapInfoWindow>
           </GMapMarker>
           <!-- <GMapMarker  :position="{lat:form.lat, lng:form.lng}">
           </GMapMarker> -->
     </GMapMap>
+    <div>
+        <h1>{{ questions[currentQ.current].question }}</h1>
+        <h1>{{ score }}</h1>
+    </div>
 </GuestLayout>
   </template>
 

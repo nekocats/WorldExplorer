@@ -2,6 +2,7 @@
     import { useForm } from '@inertiajs/vue3'
     import EditForm from './Edit.vue'
     import AppLayout from '@/Layouts/AppLayout.vue';
+
 const props = defineProps({
     markers: {
         type: Object,
@@ -12,6 +13,7 @@ const props = defineProps({
         default: () => ({}),
     },
 })
+
 console.log(props.quiz)
 console.log(props.markers)
     const form = useForm({
@@ -56,7 +58,7 @@ function destroy(id) {
           <GMapMarker  :position="{lat:form.lat, lng:form.lng}">
           </GMapMarker>
     </GMapMap>
-    <form @submit.prevent="form.post('quizmap/store')">
+    <form @submit.prevent="form.post('store')">
     <input type="text" v-model="form.question">
     <input type="text" v-model="form.lat">
     <input type="text" v-model="form.lng">
