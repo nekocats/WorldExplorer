@@ -26,3 +26,6 @@ artisan
 .idea/modules.xml
 .idea/vcs.xml
 .idea/workspace.xml
+/testing and temporary code.vue
+/.idea/php.xml
+/.idea/phpunit.xml
