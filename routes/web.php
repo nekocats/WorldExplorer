@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\MapQuizController;
-use App\Models\MapQuiz;
+use App\Models\MapQuiz; 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;

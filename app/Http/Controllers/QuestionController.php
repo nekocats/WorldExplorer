@@ -4,62 +4,65 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
-
+use Inertia\Inertia;
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $questions = Question::all();
+        return Inertia::render('Questions/Index', [
+            'questions' => $questions,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return Inertia::render('Questions/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string',
+            'option_a' => 'required|string',
+            'option_b' => 'required|string',
+            'option_c' => 'required|string',
+            'option_d' => 'required|string',
+            'correct_answer' => 'required|string',
+        ]);
+
+        Question::create($validatedData);
+
+        return redirect()->route('questions.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Question $question)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Question $question)
     {
-        //
+        return Inertia::render('Questions/Edit', [
+            'question' => $question,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Question $question)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string',
+            'option_a' => 'required|string',
+            'option_b' => 'required|string',
+            'option_c' => 'required|string',
+            'option_d' => 'required|string',
+            'correct_answer' => 'required|string',
+        ]);
+
+        $question->update($validatedData);
+
+        return redirect()->route('questions.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Question $question)
     {
-        //
+        $question->delete();
+
+        return redirect()->route('questions.index');
     }
 }

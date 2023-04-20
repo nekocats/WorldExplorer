@@ -4,61 +4,74 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class QuizController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $quizzes = Quiz::with('questions')->get();
+        return Inertia::render('Quizzes/Index', [
+            'quizzes' => $quizzes,
+        ]);
     }
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+        return Inertia::render('Quizzes/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+        ]);
+
+        $quiz = Quiz::create($validatedData);
+
+        return redirect()->route('quizzes.show', $quiz->id);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Quiz $quiz)
     {
-        //
+        $quiz->load('questions');
+        return Inertia::render('Quizzes/Show', [
+            'quiz' => $quiz,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Quiz $quiz)
     {
-        //
+        return Inertia::render('Quizzes/Edit', [
+            'quiz' => $quiz,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Quiz $quiz)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+        ]);
+
+        $quiz->update($validatedData);
+
+        return redirect()->route('quizzes.show', $quiz->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Quiz $quiz)
     {
-        //
+        $quiz->delete();
+
+        return redirect()->route('quizzes.index');
+    }
+
+    public function addQuestion(Request $request, Quiz $quiz)
+    {
+        $questionIds = $request->input('questionIds');
+        $quiz->questions()->sync($questionIds);
+
+        return redirect()->route('quizzes.show', $quiz->id);
     }
 }
