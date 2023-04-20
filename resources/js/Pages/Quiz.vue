@@ -20,19 +20,19 @@
         </div>
         <div class="flex justify-center p-2 items-center ">
         <div class="backdrop-blur-md 	  rounded-full">
-            <Link :href="route('welcome')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-5xl text-pink-400 py-2 px-60 rounded-full font-bold ">Placeholder answer</Link> <br>
+            <Link :href="route('welcome')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-3xl text-pink-400 py-2 px-60 rounded-full font-bold ">Placeholder answer</Link> <br>
         </div>
         <div class="p-2 rounded-full">
-            <Link :href="route('welcome')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-5xl text-pink-400 py-2 px-60 rounded-full font-bold ">Placeholder answer</Link> <br>
+            <Link :href="route('welcome')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-3xl text-pink-400 py-2 px-60 rounded-full font-bold ">Placeholder answer</Link> <br>
         </div>
         
        </div>
        <div class="flex justify-center p-2 items-center ">
         <div class="backdrop-blur-md 	  rounded-full">
-            <Link :href="route('welcome')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-5xl text-pink-400 py-2 px-60 rounded-full font-bold ">Placeholder answer</Link> <br>
+            <Link :href="route('welcome')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-3xl text-pink-400 py-2 px-60 rounded-full font-bold ">Placeholder answer</Link> <br>
         </div>
         <div class="p-2 rounded-full">
-            <Link :href="route('welcome')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-5xl text-pink-400 py-2 px-60 rounded-full font-bold ">Placeholder answer</Link> <br>
+            <Link :href="route('welcome')" class="bg-pink-400 bg-opacity-25 text-shadow shadow-black font-raleway text-3xl text-pink-400 py-2 px-60 rounded-full font-bold ">Placeholder answer</Link> <br>
         </div>
         </div>
     </div>
