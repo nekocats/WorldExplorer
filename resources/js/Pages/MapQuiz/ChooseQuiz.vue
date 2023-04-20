@@ -12,6 +12,6 @@ console.log(props.quizzes)
 </script>
 <template>
             <div class="flex flex-col pl-9 " :key="quiz.id" v-for="quiz in quizzes">
-            <Link class="" :href="route('quizmap.playQuiz', quiz.id)" >{{ quiz.title }}</Link>
+            <Link class="" :href="route('quizmap.show', quiz.id)" >{{ quiz.title }}</Link>
         </div>
 </template>

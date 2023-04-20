@@ -48,7 +48,9 @@ class MapQuizController extends Controller
      */
     public function show(MapQuiz $mapQuiz)
     {
-        
+        return Inertia::render('MapQuiz/PlayQuiz', [
+            'quiz' => MapQuiz::with('questions')->get()
+        ]);
     }
 
     /**

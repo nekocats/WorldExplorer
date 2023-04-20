@@ -1,20 +1,18 @@
 <script setup>
     import { useForm } from '@inertiajs/vue3'
-    import PrimaryButton from '../Components/PrimaryButton.vue';
-    import EditForm from './Edit.vue'
-    import GuestLayout from '@/Layouts/GuestLayout.vue';
+
 const props = defineProps({
-    markers: {
+    quiz: {
         type: Object,
         default: () => ({}),
     },
 })
-console.log(props.markers)
+console.log(props.quiz)
 
 
 function mark(event) {
-    form.lat = event.latLng.lat()
-    form.lng = event.latLng.lng()
+event.latLng.lat()
+event.latLng.lng()
 
   }
 
@@ -38,8 +36,8 @@ function mark(event) {
 
         </GMapInfoWindow>
           </GMapMarker>
-          <GMapMarker  :position="{lat:form.lat, lng:form.lng}">
-          </GMapMarker>
+          <!-- <GMapMarker  :position="{lat:form.lat, lng:form.lng}">
+          </GMapMarker> -->
     </GMapMap>
 </GuestLayout>
   </template>
