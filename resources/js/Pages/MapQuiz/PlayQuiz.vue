@@ -1,42 +1,28 @@
 <script setup>
     import { useForm } from '@inertiajs/vue3'
-    import DangerButton from '../Components/DangerButton.vue';
+    import PrimaryButton from '../Components/PrimaryButton.vue';
     import EditForm from './Edit.vue'
-
+    import GuestLayout from '@/Layouts/GuestLayout.vue';
 const props = defineProps({
     markers: {
         type: Object,
         default: () => ({}),
     },
-    quiz: {
-        type: Object,
-        default: () => ({}),
-    },
 })
 console.log(props.markers)
-    const form = useForm({
-  question: null,
-  lat: null,
-  lng: null,
-  map_quiz_id: null,
-})
 
-const formDel = useForm({});
+
 function mark(event) {
     form.lat = event.latLng.lat()
     form.lng = event.latLng.lng()
 
   }
-function destroy(id) {
-    if (confirm("Are you sure you want to Delete")) {
-        formDel.delete(route('maps.destroy', id));
-    }
-}
+
 
 </script>
 
 <template>
-
+    <GuestLayout>
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="terrain" style="width: 100vw; height: 20rem" @click="mark">
        <GMapMarker :key="marker.id" v-for="marker in markers" :position="{lat:marker.lat, lng:marker.lng}" :clickable="true"
           @click="openMarker(marker.id)" >
@@ -48,20 +34,14 @@ function destroy(id) {
           <div> <span>{{marker.name}}</span>
             <p>{{marker.description}}</p>
         </div>
-        <DangerButton @click="destroy(marker.id)">DELETE</DangerButton>
-        <EditForm :marker = marker></EditForm>
+
+
         </GMapInfoWindow>
           </GMapMarker>
           <GMapMarker  :position="{lat:form.lat, lng:form.lng}">
           </GMapMarker>
     </GMapMap>
-    <form @submit.prevent="form.post('/add-marker')">
-    <input type="text" v-model="form.question">
-    <input type="text" v-model="form.lat">
-    <input type="text" v-model="form.lng">
-    <button type="submit" :disabled="form.processing">Submit</button>
-  </form>
-
+</GuestLayout>
   </template>
 
   <script>

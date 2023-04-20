@@ -1,7 +1,7 @@
 <script setup>
     import { useForm } from '@inertiajs/vue3'
     import EditForm from './Edit.vue'
-
+    import AppLayout from '@/Layouts/AppLayout.vue';
 const props = defineProps({
     markers: {
         type: Object,
@@ -37,7 +37,7 @@ function destroy(id) {
 </script>
 
 <template>
-
+    <AppLayout>
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="terrain" style="width: 100vw; height: 20rem" @click="mark">
        <GMapMarker :key="marker.id" v-for="marker in markers" :position="{lat:marker.lat, lng:marker.lng}" :clickable="true"
           @click="openMarker(marker.id)" >
@@ -56,7 +56,7 @@ function destroy(id) {
           <GMapMarker  :position="{lat:form.lat, lng:form.lng}">
           </GMapMarker>
     </GMapMap>
-    <form @submit.prevent="form.post('mapquestion.store')">
+    <form @submit.prevent="form.post('quizmap/store')">
     <input type="text" v-model="form.question">
     <input type="text" v-model="form.lat">
     <input type="text" v-model="form.lng">
@@ -65,7 +65,7 @@ function destroy(id) {
                     </div>
     <button type="submit" :disabled="form.processing">Submit</button>
   </form>
-
+</AppLayout>
   </template>
 
   <script>

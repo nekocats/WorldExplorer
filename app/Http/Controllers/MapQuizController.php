@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MapQuiz;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class MapQuizController extends Controller
 {
@@ -12,7 +13,9 @@ class MapQuizController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('MapQuiz/ChooseQuiz', [
+            'quizzes' => MapQuiz::all()
+        ]);
     }
 
     /**
@@ -45,7 +48,7 @@ class MapQuizController extends Controller
      */
     public function show(MapQuiz $mapQuiz)
     {
-        //
+        
     }
 
     /**

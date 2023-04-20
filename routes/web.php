@@ -43,7 +43,7 @@ Route::get('/mapquizzes', function () {
     ]);
 })->name('mapquizzes');
 
-Route::get('/choosequiz', [MapQuizController::class, 'index'])->middleware(['auth'])->name('choosequiz');
+Route::get('/choosemapquiz', [MapQuizController::class, 'index'])->middleware(['auth'])->name('choosequiz');
 
 
 Route::name('quizmap.')->prefix('quizmap')->group(function () {

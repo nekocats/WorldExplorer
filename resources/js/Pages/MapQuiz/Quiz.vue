@@ -5,6 +5,6 @@ import Welcome from '@/Components/Welcome.vue';
 
 <template>
     <AppLayout title="About">
- 
+
     </AppLayout>
 </template>
