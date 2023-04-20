@@ -22,11 +22,11 @@ const form = useForm({
     <AppLayout title="Dashboard">
         <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
             <form @submit.prevent="form.post(route('mapquiz.store'), { onSuccess: () => form.reset() })">
-                <input placeholder="Title" type="text" v-model="form.title" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                <input placeholder="Title" type="text" v-model="form.title" class="block w-full border-pink-500 focus:border-pink-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                 <textarea
                     v-model="form.description"
                     placeholder="Description"
-                    class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                    class="block w-full border-pink-500 focus:border-pink-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                 ></textarea>
                 <div class="flex items-center text-center">
                         <input type="file" name="images[]" multiple @input="form.images = $event.target.files" />
@@ -36,8 +36,8 @@ const form = useForm({
             </form>
 
         </div>
-        <div class="flex flex-col" :key="quiz.id" v-for="quiz in quizzes">
-            <Link class="text-white" :href="route('')" >{{ quiz.title }}</Link>
+        <div class="flex flex-col pl-9 " :key="quiz.id" v-for="quiz in quizzes">
+            <Link class="text-white" :href="route('quizmap', quiz.id)" >{{ quiz.title }}</Link>
         </div>
 
     </AppLayout>
