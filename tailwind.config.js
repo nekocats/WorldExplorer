@@ -11,6 +11,7 @@ module.exports = {
         './resources/js/**/*.vue',
     ],
 
+    
     screens: {
         sm: '480px',
         md: '768px',
@@ -25,6 +26,11 @@ module.exports = {
                 estonia: ['Estonia', ...defaultTheme.fontFamily.sans],
             
             },
+
+            colors: {
+                materialgreenbg: '#1C1F17',
+            },
+
             textShadow: {
                 sm: '0 1px 2px var(--tw-shadow-color)',
                 DEFAULT: '0px 4px 4px var(--tw-shadow-color)',
