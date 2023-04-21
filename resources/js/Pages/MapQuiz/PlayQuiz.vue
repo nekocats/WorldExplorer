@@ -71,8 +71,8 @@ if (gameOver == false) {
        <GMapMarker :position="{lat:guess.lat, lng:guess.lng}" :clickable="true"
           @click="openMarker(marker.id)" >
           </GMapMarker>
-          <!-- <GMapMarker  :position="{lat:form.lat, lng:form.lng}">
-          </GMapMarker> -->
+           <GMapMarker  :position="{lat:questions[currentQ.current].lat, lng:questions[currentQ.current].lng}">
+          </GMapMarker>
     </GMapMap>
 </GuestLayout>
 </div>
