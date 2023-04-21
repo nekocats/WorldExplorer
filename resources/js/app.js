@@ -18,7 +18,7 @@ createInertiaApp({
             .use(ZiggyVue, Ziggy)
             .use(VueGoogleMaps, {
                 load: {
-
+                key: props.initialPage.props.mapsapikey,
                 },
             })
             .mount(el);
