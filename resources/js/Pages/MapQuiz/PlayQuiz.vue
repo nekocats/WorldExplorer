@@ -61,15 +61,20 @@ if (gameOver == false) {
 </script>
 
 <template>
-      <div class="flex bg-materialgreenbg w-full">
-        <h1 class="text-white text-5xl">{{ questions[currentQ.current].question }}</h1>
-        <h1 class="text-lime-600 text-5xl"> Score: {{ score }}</h1>
+  <div class='relative  bg-frontPageBg bg-cover grid justify-items-center items-center min-h-screen bg-dots-darker bg-center bg-materialgreenbg selection:bg-lime-950 selection:text-white'>
+    <div>
+        <h1 class="backdrop-blur-3xl bg-opacity-25 text-shadow shadow-black font-raleway text-5xl text-white py-2 px-20 rounded-lg font-bold">{{ questions[currentQ.current].question }}</h1>
+        <h1 class="backdrop-blur-3xl bg-opacity-25 text-shadow shadow-black font-raleway text-5xl text-white py-2 px-20 rounded-lg font-bold">{{ score }}</h1>
     </div>
-  <div class='relative  bg-frontPageBg bg-cover flex justify-end min-h-screen bg-dots-darker bg-center bg-materialgreenbg selection:bg-lime-950 selection:text-white'>
     <GuestLayout>
-    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="3" map-type-id="terrain" style="width: 100vw; height: 50rem" @click="mark">
+    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="terrain" style="width: 100vw; height: 35rem" @click="mark">
        <GMapMarker :position="{lat:guess.lat, lng:guess.lng}" :clickable="true"
           @click="openMarker(marker.id)" >
+
+          <div>
+
+        </div>
+
           </GMapMarker>
            <GMapMarker  :position="{lat:questions[currentQ.current].lat, lng:questions[currentQ.current].lng}">
           </GMapMarker>
@@ -77,6 +82,7 @@ if (gameOver == false) {
 </GuestLayout>
 </div>
   </template>
+
   <script>
     export default {
     data() {
