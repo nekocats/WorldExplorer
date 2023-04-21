@@ -49,11 +49,7 @@ const logout = () => {
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink :href="route('welcome')" :active="route().current('welcome')">
-                                    Play
-                                </NavLink>
-
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    About
+                                    Play HistoryGuesser
                                 </NavLink>
 
                                 <NavLink :href="route('profile.show')" :active="route().current('profile.show')">
@@ -61,7 +57,11 @@ const logout = () => {
                                 </NavLink>
 
                                 <NavLink :href="route('mapquizzes')" :active="route().current('mapquizzes')">
-                                    MapQuiz
+                                    Add Map Quiz Data
+                                </NavLink>
+
+                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                    About
                                 </NavLink>
                             </div>
                         </div>

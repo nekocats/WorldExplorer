@@ -1,5 +1,5 @@
 <script setup>
-import {Head, useForm} from '@inertiajs/vue3'
+import {Head, Link, useForm} from '@inertiajs/vue3'
 import { reactive, ref } from 'vue';
 import haversine from 'haversine-distance'
 
@@ -60,14 +60,20 @@ if (gameOver == false) {
 
 </script>
 
-<template>
+
+
+<template class="whitespace-nowrap overflow-hidden w-24 scrollbar-none">
     <Head title="Map Quiz"/>
-  <div class='relative  bg-frontPageBg bg-cover grid justify-items-center items-center min-h-screen bg-dots-darker bg-center bg-materialgreenbg selection:bg-lime-950 selection:text-white'>
-    <div>
-        <h1 class="text-shadow shadow-black font-raleway text-5xl text-white py-2 px-20 rounded-lg font-bold">{{ questions[currentQ.current].question }}</h1>
-        <h1 class="text-shadow shadow-black font-raleway text-6xl text-lime-700 py-2 px-20 rounded-lg font-bold">Score: {{ score }}</h1>
+  <div class='relative  whitespace-nowrap overflow-hidden overscroll-none scrollbar-none bg-frontPageBg bg-cover grid  min-h-screen bg-dots-darker bg-center bg-materialgreenbg selection:bg-lime-950 selection:text-white'>
+
+
+      <div class="flex justify-between py-10 pl-6 whitespace-nowrap overscroll-none overflow-hidden scrollbar-none">
+          <Link :href="route('welcome')" class="scrollbar-none flex text-2xl p-4 justify-items-right items-right py-4 border-4 border-lime-950 shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000 text-shadow shadow-black font-raleway text-white text-right rounded-lg">&lt; Go back to main menu</Link> <br>
+        <h1 class="scrollbar-none text-shadow shadow-black font-raleway text-5xl text-white py-2 px-20 rounded-lg font-bold">{{ questions[currentQ.current].question }}</h1>
+        <h1 class="scrollbar-none text-shadow shadow-black font-raleway text-6xl text-lime-700 py-2 px-20 rounded-lg font-bold">Score: {{ score }}</h1>
+
     </div>
-    <GuestLayout>
+    <GuestLayout class="scrollbar-none">
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="terrain" style="width: 100vw; height: 45rem" @click="mark">
        <GMapMarker :position="{lat:guess.lat, lng:guess.lng}" :clickable="true"
           @click="openMarker(marker.id)" >

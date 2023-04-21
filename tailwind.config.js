@@ -39,7 +39,7 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), plugin(function ({ matchUtilities, theme }) {
+    plugins: [require('@tailwindcss/forms'), require('tailwind-scrollbar-hide'), require('tailwindcss-no-scrollbar'),  require('@tailwindcss/typography'), plugin(function ({ matchUtilities, theme }) {
         matchUtilities(
             {
                 'text-shadow': (value) => ({
