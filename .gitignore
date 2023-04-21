@@ -29,3 +29,4 @@ artisan
 /testing and temporary code.vue
 /.idea/php.xml
 /.idea/phpunit.xml
+.idea/.gitignore
