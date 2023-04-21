@@ -36,10 +36,10 @@ if (gameOver == false) {
 
 
 
-    if (gameOver == false && answer.value <= 5000) {
+    if (gameOver == false && answer.value <= 50000) {
         score.value = score.value + 5000
-    } else if(gameOver == false && answer.value > 5000 && answer.value < 10000) {
-        score.value = score.value + 10000 - Math.round(answer.value)
+    } else if(gameOver == false && answer.value > 50000 && answer.value < 100000) {
+        score.value = score.value + 10000 - Math.round(answer.value / 10)
     }
     if (qCount == currentQ.value.current + 1) {
         gameOver = true
