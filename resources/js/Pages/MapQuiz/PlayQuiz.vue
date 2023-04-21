@@ -59,6 +59,7 @@ if (gameOver == false) {
 </script>
 
 <template>
+  <div class='relative  bg-frontPageBg bg-cover grid justify-items-center items-center min-h-screen bg-dots-darker bg-center bg-materialgreenbg selection:bg-lime-950 selection:text-white'>
     <GuestLayout>
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="terrain" style="width: 100vw; height: 20rem" @click="mark">
        <GMapMarker :position="{lat:guess.lat, lng:guess.lng}" :clickable="true"
@@ -73,10 +74,11 @@ if (gameOver == false) {
           </GMapMarker> -->
     </GMapMap>
     <div>
-        <h1>{{ questions[currentQ.current].question }}</h1>
-        <h1>{{ score }}</h1>
+        <h1 class="backdrop-blur-3xl bg-opacity-25 text-shadow shadow-black font-raleway text-5xl text-white py-2 px-20 rounded-lg font-bold">{{ questions[currentQ.current].question }}</h1>
+        <h1 class="backdrop-blur-3xl bg-opacity-25 text-shadow shadow-black font-raleway text-5xl text-white py-2 px-20 rounded-lg font-bold">{{ score }}</h1>
     </div>
 </GuestLayout>
+</div>
   </template>
 
   <script>
