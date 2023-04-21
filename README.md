@@ -8,5 +8,8 @@ Main Menu            |  Game select
 
 Choose quiz mode            |  Game
 :-------------------------:|:-------------------------:
-![image](https://user-images.githubusercontent.com/71066639/233584907-a4690766-ea4f-4052-9702-5b5368243647.png)  |  ![image](https://user-images.githubusercontent.com/71066639/233585052-02b8ebda-13d2-4066-b8d2-bab9bf974999.png)
+![image](https://user-images.githubusercontent.com/71066639/233584907-a4690766-ea4f-4052-9702-5b5368243647.png)  |  ![image](https://user-images.githubusercontent.com/71066639/233734905-94fadc44-f13f-40b0-9786-fe854992d270.png)
 
+Map data adding            |  About page
+:-------------------------:|:-------------------------:
+![image](https://user-images.githubusercontent.com/71066639/233734775-6b32ccd7-1f82-4f87-a03a-c92938d43d0f.png)  |  ![image](https://user-images.githubusercontent.com/71066639/233734825-f3c6791a-5d30-4129-aa8f-9a999db7252d.png)
