@@ -77,8 +77,8 @@ if (gameOver == false) {
         </div>
 
           </GMapMarker>
-           <GMapMarker  :position="{lat:questions[currentQ.current].lat, lng:questions[currentQ.current].lng}">
-          </GMapMarker>
+           <!-- <GMapMarker  :position="{lat:questions[currentQ.current].lat, lng:questions[currentQ.current].lng}">
+          </GMapMarker> -->
     </GMapMap>
 </GuestLayout>
 </div>

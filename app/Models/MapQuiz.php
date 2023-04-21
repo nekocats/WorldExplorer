@@ -17,4 +17,5 @@ class MapQuiz extends Model implements HasMedia
     {
         return $this->hasMany(MapQuestion::class);
     }
+
 }
