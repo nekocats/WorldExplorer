@@ -1,5 +1,5 @@
 <script setup>
-    import { useForm } from '@inertiajs/vue3'
+import {Head, useForm} from '@inertiajs/vue3'
     import EditForm from './Edit.vue'
     import AppLayout from '@/Layouts/AppLayout.vue';
 
@@ -39,6 +39,7 @@ function destroy(id) {
 </script>
 
 <template>
+    <Head title="Map Quiz Edit"/>
     <AppLayout>
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="terrain" style="width: 100vw; height: 20rem" @click="mark">
        <GMapMarker :key="marker.id" v-for="marker in markers" :position="{lat:marker.lat, lng:marker.lng}" :clickable="true"

@@ -1,6 +1,6 @@
 <script setup>
 
-import { Link } from '@inertiajs/vue3';
+import {Head, Link} from '@inertiajs/vue3';
 
 const props = defineProps({
     quizzes: {
@@ -11,6 +11,7 @@ const props = defineProps({
 console.log(props.quizzes)
 </script>
 <template>
+    <Head title="Choose quiz"/>
     <div class="relative  bg-frontPageBg bg-cover grid justify-items-center items-center min-h-screen bg-dots-darker bg-center bg-materialgreenbg selection:bg-lime-950 selection:text-white">
     <div class="flex flex-col items-center justify-center ">
         <span class=" text-white text-3xl">

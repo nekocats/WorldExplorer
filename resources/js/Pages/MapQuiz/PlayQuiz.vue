@@ -1,5 +1,5 @@
 <script setup>
-    import { useForm } from '@inertiajs/vue3'
+import {Head, useForm} from '@inertiajs/vue3'
 import { reactive, ref } from 'vue';
 import haversine from 'haversine-distance'
 
@@ -61,6 +61,7 @@ if (gameOver == false) {
 </script>
 
 <template>
+    <Head title="Map Quiz"/>
   <div class='relative  bg-frontPageBg bg-cover grid justify-items-center items-center min-h-screen bg-dots-darker bg-center bg-materialgreenbg selection:bg-lime-950 selection:text-white'>
     <div>
         <h1 class="p-2 text-shadow shadow-black font-raleway text-5xl text-white py-2 px-20 rounded-lg font-bold">{{ questions[currentQ.current].question }}</h1>
