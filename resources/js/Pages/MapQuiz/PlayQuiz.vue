@@ -74,7 +74,7 @@ if (gameOver == false) {
 
     </div>
     <GuestLayout class="scrollbar-none">
-    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="terrain" style="width: 100vw; height: 45rem" @click="mark">
+    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" style="width: 100vw; height: 45rem" @click="mark">
        <GMapMarker :position="{lat:guess.lat, lng:guess.lng}" :clickable="true"
           @click="openMarker(marker.id)" >
 

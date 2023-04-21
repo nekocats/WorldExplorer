@@ -31,7 +31,7 @@
             </h1>
         </div>
 
-        <div class="py-4 px-0.5 border-4 border-lime-950 shadow-2xl shadw-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">
+        <div class="py-4 px-0.5 border-4 border-lime-950 shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">
             <Link :href="route('quiz')" class=" backdrop-blur-3xl bg-opacity-25 text-shadow shadow-black font-raleway text-5xl text-white py-2 px-20 rounded-lg font-bold ">Quiz (Work in progress)</Link> <br>
         </div>
         <div class="py-4 px-0.5 border-4 border-lime-950 shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">
