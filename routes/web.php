@@ -59,6 +59,9 @@ Route::name('quizmap.')->prefix('quizmap')->group(function () {
 Route::get('/quiz', function () {
     return Inertia::render('Quiz');
 })->name('quiz');
+Route::get('/finish', function () {
+    return Inertia::render('Finish');
+})->name('finish');
 
 Route::resource('mapquiz',MapQuizController::class);
 
