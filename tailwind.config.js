@@ -11,20 +11,20 @@ module.exports = {
         './resources/js/**/*.vue',
     ],
 
-    
+
     screens: {
         sm: '480px',
         md: '768px',
         lg: '976px',
         xl: '1440px',
-      },
-    
+    },
+
     theme: {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 estonia: ['Estonia', ...defaultTheme.fontFamily.sans],
-            
+
             },
 
             colors: {
@@ -39,7 +39,7 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms'), require('tailwind-scrollbar-hide'), require('tailwindcss-no-scrollbar'),  require('@tailwindcss/typography'), plugin(function ({ matchUtilities, theme }) {
+    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), plugin(function ({ matchUtilities, theme }) {
         matchUtilities(
             {
                 'text-shadow': (value) => ({
