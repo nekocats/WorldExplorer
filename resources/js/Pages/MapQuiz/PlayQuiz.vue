@@ -67,10 +67,14 @@ if (gameOver == false) {
   <div class='relative  whitespace-nowrap overflow-hidden overscroll-none scrollbar-none bg-frontPageBg bg-cover grid  min-h-screen bg-dots-darker bg-center bg-materialgreenbg selection:bg-lime-950 selection:text-white'>
 
 
-      <div class="flex justify-between py-10 pl-6 whitespace-nowrap overscroll-none overflow-hidden scrollbar-none">
-          <Link :href="route('welcome')" class="scrollbar-none flex text-2xl p-4 justify-items-right items-right py-4 border-4 border-lime-950 shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000 text-shadow shadow-black font-raleway text-white text-right rounded-lg">&lt; Go back to main menu</Link> <br>
-        <h1 class="scrollbar-none text-shadow shadow-black font-raleway text-5xl text-white py-2 px-20 rounded-lg font-bold">{{ questions[currentQ.current].question }}</h1>
-        <h1 class="scrollbar-none text-shadow shadow-black font-raleway text-6xl text-lime-700 py-2 px-20 rounded-lg font-bold">Score: {{ score }}</h1>
+      <div class="flex justify-between items-center pl-6 ">
+          <Link :href="route('choosequiz')" class="scrollbar-none flex text-2xl p-4 justify-items-right items-right py-4 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000 text-shadow shadow-black font-raleway text-white text-right rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+              </svg>
+          </Link> <br>
+        <h1 class="text-shadow shadow-black font-raleway box-border text-5xl text-white">{{ questions[currentQ.current].question }}</h1>
+        <h1 class="text-shadow shadow-black font-raleway box-border text-4xl text-lime-700  rounded-lg font-bold">Score: {{ score }}</h1>
 
     </div>
     <GuestLayout class="scrollbar-none">
