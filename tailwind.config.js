@@ -29,6 +29,7 @@ module.exports = {
 
             colors: {
                 materialgreenbg: '#080B00',
+                materialgreenlight: '#f8ffe6',
             },
 
             textShadow: {
