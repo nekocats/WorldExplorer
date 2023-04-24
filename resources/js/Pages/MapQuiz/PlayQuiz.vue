@@ -74,7 +74,7 @@ if (gameOver == false) {
               </svg>
           </Link> <br>
         <h1 class="text-shadow shadow-black font-raleway box-border text-5xl text-white">{{ questions[currentQ.current].question }}</h1>
-        <h1 class="text-shadow shadow-black font-raleway box-border text-4xl text-lime-700  rounded-lg font-bold">Score: {{ score }}</h1>
+        <h1 class="text-shadow shadow-black font-raleway box-border text-5xl text-lime-700  rounded-lg font-bold pr-10">Score: {{ score }}</h1>
 
     </div>
     <GuestLayout class="scrollbar-none">
