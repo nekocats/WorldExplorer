@@ -29,7 +29,7 @@ defineProps({
                 Welcome to 
             </span>
             <h1 class="center text-lime-600 text-5xl">
-                WorldExplorer
+                WorldExplorer!
             </h1>
         </div>
     
