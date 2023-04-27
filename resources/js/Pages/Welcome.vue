@@ -28,7 +28,7 @@ defineProps({
                 Welcome to 
             </span>
             <h1 class="center text-lime-600 text-5xl">
-                HistoryGuesser
+                WorldExplorer
             </h1>
         </div>
     
