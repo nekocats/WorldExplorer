@@ -22,7 +22,7 @@ defineProps({
         </div>
         <div class="text-center">
         <h1 class="text-4xl font-bold tracking-tight text-lime-600 sm:text-6xl">WorldExplorer</h1>
-        <p class="mt-6 text-lg leading-8 text-white max-w-[65ch]">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+        <p class="mt-6 text-lg leading-8 text-white max-w-[65ch]">Welcome to WorldExplorer, the addictive map guessing game! thousands of locations and earn badges as you progress. Plus, create your own maps and challenge yourself or others to guess your custom locations. Start playing now!</p>
         <div class="mt-10 flex items-center justify-center gap-x-6">
           <a :href="route('gameselect')" class="rounded-md bg-lime-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Play</a>
           <a :href="route('dashboard')" class="text-sm font-semibold leading-6 text-white">Learn more <span aria-hidden="true">→</span></a>
