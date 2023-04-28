@@ -14,27 +14,19 @@ defineProps({
     <Head title="Welcome" />
     <div class="relative  bg-materialgreenlight dark:bg-materialgreenbg bg-cover grid justify-items-center items-center min-h-screen bg-center selection:bg-lime-950 selection:text-white">
         <div v-if="canLogin" class="w-full rounded-b-[32px] sm:fixed  sm:top-0 sm:right-0 p-6 text-right">
-            <Link v-if="$page.props.auth.user" :href="route('mapquizzes')" class="font-semibold dark:text-shadow shadow-black text-[#7E4400] font-raleway text-lime-600 dark:text-lime-600 text-2xl">Management</Link>
-            <Link v-if="$page.props.auth.user" :href="route('dashboard')" class="p-4 font-semibold dark:text-shadow shadow-black text-[#7E4400] font-raleway text-lime-600 dark:text-lime-600 text-2xl">About</Link>
+            <Link v-if="$page.props.auth.user" :href="route('login')" class="font-semibold text-lime-400 text-sm  dark:text-gray-200">Management</Link>
             <template v-else>
-                <Link :href="route('login')" class="font-semibold text-lime-400 text-[40px]  dark:text-gray-200">Log in</Link>
-
-                <Link v-if="canRegister" :href="route('register')" class="ml-4 font-semibold  text-[40px] text-lime-600  dark:text-lime-600 ">Register</Link>
-
-                
+                <Link :href="route('login')" class="font-semibold text-lime-400 text-sm  dark:text-gray-200">Log in</Link>
+                <Link v-if="canRegister" :href="route('register')" class="ml-4 font-semibold  text-sm text-lime-600  dark:text-lime-600 ">Register</Link>
             </template>
         </div>
-        <div >
-            <span class="center text-lime-900 dark:text-white text-3xl">
-                Welcome to 
-            </span>
-            <h1 class="center text-lime-600 text-5xl">
-                WorldExplorer
-            </h1>
+        <div class="text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-lime-600 sm:text-6xl">WorldExplorer</h1>
+        <p class="mt-6 text-lg leading-8 text-white max-w-[65ch]">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+        <div class="mt-10 flex items-center justify-center gap-x-6">
+          <a :href="route('gameselect')" class="rounded-md bg-lime-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Play</a>
+          <a :href="route('dashboard')" class="text-sm font-semibold leading-6 text-white">Learn more <span aria-hidden="true">→</span></a>
         </div>
-    
-        <div class="py-4 px-0.5 border-4 border-lime-950 shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">
-            <Link :href="route('gameselect')" class=" backdrop-blur-3xl bg-opacity-25 dark:text-shadow shadow-black font-raleway text-5xl text-lime-900 dark:text-white py-2 px-20 rounded-lg font-bold ">Play</Link> <br>
         </div>
     </div>
 </template>
