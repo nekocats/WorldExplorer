@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -11,6 +12,7 @@ defineProps({
 
 
 <template class="bg">
+
     <Head title="Welcome" />
     <div class="relative  bg-materialgreenlight dark:bg-materialgreenbg bg-cover grid justify-items-center items-center min-h-screen bg-center selection:bg-lime-950 selection:text-white">
         <div v-if="canLogin" class="w-full rounded-b-[32px] sm:fixed  sm:top-0 sm:right-0 p-6 text-right">
@@ -20,7 +22,8 @@ defineProps({
                 <Link v-if="canRegister" :href="route('register')" class="ml-4 font-semibold  text-sm text-lime-600  dark:text-lime-400 ">Register</Link>
             </template>
         </div>
-        <div class="text-center">
+        <div class="text-center self-center items-center">
+            <ApplicationLogo class="block h-40 justify-center self-center items-center w-auto" />
         <h1 class="text-4xl font-bold tracking-tight text-lime-600 sm:text-6xl">WorldExplorer</h1>
         <p class="mt-6 text-lg leading-8 font-semibold text-lime-900 dark:text-white max-w-[65ch]">Welcome to WorldExplorer, the addictive map guessing game! thousands of locations. Plus you can create your own maps and challenge yourself or others to guess. Start playing now!</p>
         <div class="mt-10 flex items-center justify-center gap-x-6">

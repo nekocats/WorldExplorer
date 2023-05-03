@@ -21,27 +21,18 @@
 
             </template>
         </div>
-        <div p-4>
-            <span class="center text-white text-5xl p-4">
-                Quiz question
-            </span>
-        <div class="flex p-4">
-            <div class="p-4 py-4 flex px-0.5 border-4 border-lime-950 shadow-2xl shadw-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">
-                <Link :href="route('welcome')" class=" backdrop-blur-3xl bg-opacity-25 text-shadow shadow-black font-raleway text-5xl text-white py-2 px-20 rounded-lg font-bold ">Answer placeholder</Link> <br>
-            </div>
-            <div class="p-4 py-4 px-0.5 border-4 border-lime-950 shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">
-                <Link :href="route('welcome')" class=" backdrop-blur-3xl bg-opacity-25 text-shadow shadow-black font-raleway text-5xl text-white py-2 px-20 rounded-lg font-bold ">Answer placeholder</Link> <br>
-            </div>
 
+        <div>
+            <h1 class="text-4xl font-bold tracking-tight text-lime-600 sm:text-6xl">Quiz Question Placeholder</h1>
         </div>
-            <div class="flex p-4">
-                <div class="p-4 py-4 flex px-0.5 border-4 border-lime-950 shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">
-                    <Link :href="route('welcome')" class=" backdrop-blur-3xl bg-opacity-25 text-shadow shadow-black font-raleway text-5xl text-white py-2 px-20 rounded-lg font-bold">Answer placeholder</Link> <br>
-                </div>
-                <div class="p-4 py-4 px-0.5 border-4 border-lime-950 shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">
-                    <Link :href="route('welcome')" class="backdrop-blur-3xl bg-opacity-25 text-shadow shadow-black font-raleway text-5xl text-white py-2 px-20 rounded-lg font-bold">Answer placeholder</Link> <br>
-                </div>
-               </div>
-    </div>
+
+        <div flex>
+            <a :href="route('gameselect')" class="rounded-md bg-lime-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">Play</a>
+            <a :href="route('gameselect')" class="rounded-md bg-lime-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">Play</a>
+        </div>
+        <div class="flex">
+            <a :href="route('gameselect')" class="rounded-md bg-lime-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">Play</a>
+            <a :href="route('gameselect')" class="rounded-md bg-lime-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">Play</a>
+        </div>
             </div>
 </template>
