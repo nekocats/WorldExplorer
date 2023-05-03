@@ -23,20 +23,21 @@
             </template>
         </div>
         <div >
-            <span class="center text-lime-700 dark:text-white text-3xl">
+            <span class="center text-lime-700 dark:text-white text-xl">
                 Choose
             </span>
-            <h1 class="center text-lime-600 text-5xl">
+            <h1 class="center text-lime-600 text-3xl">
                 Gamemode
             </h1>
         </div>
-
-        <div class="py-4 px-0.5 border-4 border-lime-950 shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">
-            <Link :href="route('quiz')" class=" backdrop-blur-3xl bg-opacity-25 dark:text-shadow shadow-black font-raleway text-5xl text-lime-800 dark:text-white py-2 px-20 rounded-lg font-bold ">Quiz (Work in progress)</Link> <br>
+        <div class="grid justify-items-center">
+        <div>
+            <Link :href="route('quiz')" class="rounded-md bg-lime-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Quiz (Work in progress)</Link> <br>
         </div>
-        <div class="py-4 px-0.5 border-4 border-lime-950 shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">
-            <Link :href="route('choosequiz')" class=" backdrop-blur-3xl bg-opacity-25 dark:text-shadow shadow-black font-raleway text-5xl text-lime-800 dark:text-white py-2 px-20 rounded-lg font-bold ">Map Quiz</Link> <br>
+        <div>
+            <Link :href="route('choosequiz')" class="rounded-md bg-lime-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Map Quiz</Link> <br>
         </div>
+    </div>
         <div class="p-5 justify-center self-center hover:shadow-lime-700 hover:border-lime-700 rounded-lg text-shadow shadow-black  text-5xl text-lime-700 dark:text-lime-300 hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000">
             <Link :href="route('welcome')">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-12 h-12 self-center">
