@@ -20,7 +20,7 @@
 
 
             </template>
-        </div>
+        </div> 
 
         <div>
             <h1 class="text-4xl font-bold tracking-tight text-lime-600 sm:text-6xl">Quiz Question Placeholder</h1>

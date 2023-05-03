@@ -24,7 +24,7 @@ class QuestionController extends Controller
     {
             $validated = $request->validate([
             'question' => 'required|string|max:255',
-            'quiz_id' => 'required'
+            'quiz_id' => 'required' 
         ]);
 
     }
