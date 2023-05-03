@@ -22,8 +22,8 @@ defineProps({
                 <Link v-if="canRegister" :href="route('register')" class="ml-4 font-semibold  text-sm text-lime-600  dark:text-lime-400 ">Register</Link>
             </template>
         </div>
-        <div class="text-center self-center items-center">
-            <ApplicationLogo class="block h-40 justify-center self-center items-center w-auto" />
+        <div class="grid text-center justify-self-center items-center">
+            <ApplicationLogo class="h-40 w-auto justify-self-center" />
         <h1 class="text-4xl font-bold tracking-tight text-lime-600 sm:text-6xl">WorldExplorer</h1>
         <p class="mt-6 text-lg leading-8 font-semibold text-lime-900 dark:text-white max-w-[65ch]">Welcome to WorldExplorer, the addictive map guessing game! thousands of locations. Plus you can create your own maps and challenge yourself or others to guess. Start playing now!</p>
         <div class="mt-10 flex items-center justify-center gap-x-6">
