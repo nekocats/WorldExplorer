@@ -1,5 +1,5 @@
 <script setup>
-    import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 
     defineProps({
     canLogin: Boolean,
@@ -13,17 +13,13 @@
     <div class="relative  bg-cover grid justify-items-center items-center min-h-screen bg-dots-darker bg-center bg-materialgreenlight dark:bg-materialgreenbg selection:bg-lime-950 selection:text-white">
         <div v-if="canLogin" class="w-full rounded-b-[32px] sm:fixed  sm:top-0 sm:right-0 p-6 text-right">
             <Link v-if="$page.props.auth.user" :href="route('dashboard')" class="font-semibold text-shadow shadow-black text-[#7E4400] font-raleway text-lime-600 dark:text-lime-600 text-2xl">About</Link>
-
             <template v-else>
-                
-                <Link :href="route('login')" class="font-semibold text-gray-200 text-[40px]  dark:text-gray-200">Log in</Link>
-
+                <Link :href="route('login')" class="font-semibold text-white text-[40px]  dark:text-gray-200">Log in</Link>
                 <Link v-if="canRegister" :href="route('register')" class="ml-4 font-semibold  text-[40px] text-lime-600  dark:text-lime-600 ">Register</Link>
-
-
             </template>
         </div>
         <div >
+            <Link v-if="$page.props.auth.user" :href="route('login')" class="font-semibold text-lime-400 text-sm  dark:text-gray-200">Management</Link>
             <h1 class="text-4xl font-bold tracking-tight text-lime-600 sm:text-6xl">Select Gamemode</h1>
         </div>
         <div class="grid justify-items-center gap-6">
