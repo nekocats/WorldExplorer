@@ -1,6 +1,5 @@
 <script setup>
     import { Head, Link } from '@inertiajs/vue3';
-    import AppLayout from '@/Layouts/AppLayout.vue';
 
     defineProps({
     canLogin: Boolean,
@@ -16,6 +15,7 @@
             <Link v-if="$page.props.auth.user" :href="route('dashboard')" class="font-semibold text-shadow shadow-black text-[#7E4400] font-raleway text-lime-600 dark:text-lime-600 text-2xl">About</Link>
 
             <template v-else>
+                
                 <Link :href="route('login')" class="font-semibold text-gray-200 text-[40px]  dark:text-gray-200">Log in</Link>
 
                 <Link v-if="canRegister" :href="route('register')" class="ml-4 font-semibold  text-[40px] text-lime-600  dark:text-lime-600 ">Register</Link>
