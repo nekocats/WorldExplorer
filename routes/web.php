@@ -62,6 +62,9 @@ Route::get('/quiz', function () {
 Route::get('/finish', function () {
     return Inertia::render('Finish');
 })->name('finish');
+Route::get('/ranking', function () {
+    return Inertia::render('Ranking');
+})->name('ranking');
 
 Route::resource('mapquiz',MapQuizController::class);
 
