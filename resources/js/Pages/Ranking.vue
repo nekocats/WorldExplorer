@@ -1,4 +1,4 @@
-  <script setup lang="ts">
+<script setup lang="ts">
 import { ref } from "vue";
 
 
@@ -17,13 +17,12 @@ const users = ref<User[]>([...Array(10).keys()].map(() => testUser));
 </script>
 
 <template>
-
-  <div class="bg-materialgreen dark:bg-materialgreenbg justify-center w-full">
-    <div class="flex flex-col mt-8">
+  <div class="bg-black">
+    <div class="flex flex-col">
       <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div class="inline-block min-w-full overflow-hidden align-middle border-b border-black-200 shadow sm:rounded-lg">
-          <table class="min-w-full ">
-            <thead class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-lime-600 uppercase border-b border-gray-200 bg-materialgreenlight dark:bg-materialgreenbg bg-cover">
+        <div class="inline-block w-full overflow-hidden shadow sm:rounded-lg">
+          <table class="w-full ">
+            <thead class=" text-xs font-medium leading-4 tracking-wider text-left text-lime-600 uppercase border-b border-black bg-materialgreenlight dark:bg-materialgreenbg bg-cover">
               <tr>
                 <th>
                   Name
@@ -36,7 +35,7 @@ const users = ref<User[]>([...Array(10).keys()].map(() => testUser));
 
             <tbody class="bg-materialgreenlight dark:bg-materialgreenbg">
               <tr v-for="(u, index) in users" :key="index">
-                <td class="px-6 py-4 border-b text-lime-600 bg-materialgreenlight dark:bg-materialgreenbg">
+                <td class="px-6 py-4 border-b border-black text-lime-600 bg-materialgreenlight dark:bg-materialgreenbg">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-10 h-10">
                       <img class="w-10 h-10 rounded-full"
@@ -50,7 +49,7 @@ const users = ref<User[]>([...Array(10).keys()].map(() => testUser));
                     </div>
                   </div>
                 </td>
-                <td class="px-6 py-4 text-sm leading-5 text-lime-600 border-b border-gray-200">
+                <td class="px-6 py-4 text-sm leading-5 text-lime-600 border-b border-black">
                   {{ u.score }}
                 </td>
               </tr>
