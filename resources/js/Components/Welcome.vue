@@ -13,8 +13,10 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
             </h1>
 
             <p class="mt-6 text-gray-500 dark:text-gray-400 leading-relaxed">
-                Very much work in progress... 
-                WorldExplorer is an addictive map guessing game with thousands of locations.
+                Welcome to WorldExplorer, the addictive map guessing game!
+                WorldExplorer is a game that allows you to create, play, and explore the world with multiple maps and quiz options.
+                WorldExplorer started as a three person project and below you will find links to our Figma page where you can see how we originally envisioned the game.
+                You can also find the github page below where you can see the source code along with release notes.
             </p>
         </div>
 
