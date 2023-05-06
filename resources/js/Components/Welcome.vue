@@ -9,12 +9,12 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
             <ApplicationLogo class="block h-12 w-auto" />
 
             <h1 class="mt-8 text-2xl font-medium text-gray-900 dark:text-white">
-                HistoryGuesser
+                WorldExplorer
             </h1>
 
             <p class="mt-6 text-gray-500 dark:text-gray-400 leading-relaxed">
                 Very much work in progress... 
-                HistoryGuesser is a game where you try to answer to history related questions.
+                WorldExplorer is an addictive map guessing game with thousands of locations.
             </p>
         </div>
 
@@ -62,7 +62,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
                 <p class="mt-4 text-sm">
                     <a href="https://www.figma.com/file/atYlTdMTTMz5g0qLh2wmaS/HistoryGuesser?node-id=0%3A1&t=yeHS6hWzQXksi0H1-1" class="inline-flex items-center font-semibold text-lime-700 dark:text-lime-300">
-                        Enjoy horrible design
+                        Enjoy amazing design
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="ml-1 w-5 h-5 fill-lime-500 dark:fill-lime-200">
                             <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />
