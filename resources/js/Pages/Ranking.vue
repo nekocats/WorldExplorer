@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+defineProps({
+    canLogin: Boolean,
+    canRegister: Boolean,
+    laravelVersion: String,
+    phpVersion: String,
+});
 
 interface User {
   name: string;
@@ -16,12 +22,12 @@ const users = ref<User[]>([...Array(10).keys()].map(() => testUser));
 
 </script>
 
-<template>
-  <div class="bg-black">
-    <div class="flex flex-col">
-      <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+<template class="bg">  
+  <div class="relative  bg-materialgreenlight dark:bg-materialgreenbg bg-cover grid justify-items-center items-center min-h-screen bg-center selection:bg-lime-950 selection:text-white">
+    <div class="flex flex-col h-full w-full block">
+      <div class="">
         <div class="inline-block w-full overflow-hidden shadow sm:rounded-lg">
-          <table class="w-full ">
+          <table class="w-full h-full">
             <thead class=" text-xs font-medium leading-4 tracking-wider text-left text-lime-600 uppercase border-b border-black bg-materialgreenlight dark:bg-materialgreenbg bg-cover">
               <tr>
                 <th>
