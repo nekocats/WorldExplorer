@@ -1,4 +1,5 @@
-<script setup lang="ts">
+<script setup> 
+import AppLayout from '@/Layouts/AppLayout.vue';
 import { ref } from "vue";
 
 defineProps({
@@ -8,21 +9,19 @@ defineProps({
     phpVersion: String,
 });
 
-interface User {
-  name: string;
-  score: string;
+const testUser = {
+  name: "Pneuma",
+  score: "6996969"
 }
 
-const testUser: User = {
-  name: "Pneuma",
-  score: "6996969",
-};
+const users = ref([...Array(10).keys()].map(() => testUser))
 
-const users = ref<User[]>([...Array(10).keys()].map(() => testUser));
 
 </script>
-
-<template class="bg">  
+<script setup lang="ts">
+</script>
+<template #header> 
+<AppLayout title="Ranking">
   <div class="relative  bg-materialgreenlight dark:bg-materialgreenbg bg-cover grid justify-items-center items-center min-h-screen bg-center selection:bg-lime-950 selection:text-white">
     <div class="flex flex-col h-full w-full block">
       <div class="">
@@ -65,4 +64,5 @@ const users = ref<User[]>([...Array(10).keys()].map(() => testUser));
       </div>
     </div>
   </div>
+</AppLayout>
 </template>
