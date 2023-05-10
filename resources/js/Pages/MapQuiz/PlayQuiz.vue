@@ -20,14 +20,22 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+
 })
 console.log(props.quiz)
 console.log(props.questions)
+
 
 watch(
   () => props.distance,
   () => {
     console.log(props.distance)
+  }
+)
+watch(
+  () => props.currentQuestion,
+  () => {
+    console.log(props.currentQuestion)
   }
 )
 const score = ref(0)
@@ -39,7 +47,7 @@ questions.push(element)
 const qCount = questions.length
 const currentQ = ref({current: props.currentQuestion})
 console.log(currentQ.value.current)
-const a = ref({lat: questions[currentQ.value.current].lat, lng: questions[currentQ.value.current].lng})
+// const a = ref({lat: questions[currentQ.value.current].lat, lng: questions[currentQ.value.current].lng})
 console.log(questions)
 const guess = ref({lat: null, lng: null})
 let gameOver = false
@@ -67,6 +75,7 @@ if (gameOver == false) {
     console.log(currentQ.value.current)
 }
   }
+const currentId = ref(0)
 const form = useForm({
   lat: null,
   lng: null,
@@ -80,8 +89,14 @@ function gMark(event) {
 
 
   function submit() {
-  router.post('/quizmap/submitanswer', form)
 
+  router.get('/quizmap/show/2', form, {
+    preserveState: true,
+
+  })
+}
+function nextQ() {
+    currentId.value++
 }
 console.log(props.distance)
 </script>
@@ -99,16 +114,16 @@ console.log(props.distance)
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
               </svg>
           </Link> <br>
-        <h1 class="dark:text-shadow shadow-black font-raleway box-border text-5xl dark:text-white">{{ questions[currentQ.current].question }}</h1>
-        <h1 class="dark:text-shadow shadow-black font-raleway box-border text-5xl text-lime-700  rounded-lg font-bold pr-10">Score: {{ score }}</h1>
+        <h1 class="dark:text-shadow shadow-black font-raleway box-border text-5xl dark:text-white">{{ questions[currentId].question }}</h1>
+        <h1 class="dark:text-shadow shadow-black font-raleway box-border text-5xl text-lime-700  rounded-lg font-bold pr-10">Score: {{ distance }}</h1>
 
     </div>
     <GuestLayout class="scrollbar-none">
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" style="width: 100vw; height: 45rem" @click="gMark">
-       <GMapMarker :position="{lat:form.lat, lng:form.lng}" :clickable="true"
-          @click="openMarker(marker.id)" >
 
-          <GMapInfoWindow>
+       <GMapMarker :position="{lat:form.lat, lng:form.lng}">
+        <button @click="nextQ" class="w-64 h-36 text-3xl">NEXT</button>
+          <GMapInfoWindow :opened="true" :closeclick="false">
             <form @submit.prevent="submit">
 
         <div class="flex p-6 justify-center items-center">

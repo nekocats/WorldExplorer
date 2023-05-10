@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\MapQuestion;
 use App\Models\MapQuiz;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -33,12 +34,12 @@ class MapQuizController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validated = Request::validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:500',
         ]);
        $mapquizzes = MapQuiz::create($validated);
-        if ($images = $request->file('images')) {
+        if ($images = Request::file('images')) {
             foreach ($images as $image) {
                 $mapquizzes->addMedia($image)->toMediaCollection('images');
             }
@@ -48,28 +49,15 @@ class MapQuizController extends Controller
     /**
      * Display the specified resource.
      */
-    public $questions = [];
-    public $currentq = 0;
+
+
     public $score = 0;
-    public $distance = null;
+
     public function show(MapQuiz $mapQuiz, $id)
     {
-        foreach (MapQuestion::select('id', 'question')->where('map_quiz_id', $id)->get() as $value) {
-            array_push($this->questions, $value);
-            shuffle($this->questions);
-        }
-        return Inertia::render('MapQuiz/PlayQuiz', [
-            'quiz' => MapQuiz::where('id', $id)->get(),
-            'questions' => $this->questions,
-            'score' => $this->score,
-            'distance' => $this->distance,
-            'currentQuestion' => $this->currentq
-        ]);
 
-    }
-    public function submitanswer(Request $request)
-    {
         function haversineGreatCircleDistance(
+
             $latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
           {
             // convert from degrees to radians
@@ -85,10 +73,47 @@ class MapQuizController extends Controller
               cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
             return $angle * $earthRadius;
           }
-          $mq = MapQuestion::where('id', $request->id)->first();
+          $currentq = null;
+        if (Request::input('lat') == 0) {
+            $distance = 0;
+            $currentq = 0;
+        }
+        else {
+            $mq = MapQuestion::where('id', Request::input('id'))->first();
+            $distance = haversineGreatCircleDistance(Request::input('lat'), Request::input('lng'), $mq->lat, $mq->lng);
 
-        $this->distance = haversineGreatCircleDistance($request->lat, $request->lng, $mq->lat, $mq->lng);
-        $this->currentq = $this->currentq + 1;
+        }
+
+
+        $questions = [];
+        foreach (MapQuestion::select('id', 'question')->where('map_quiz_id', $id)->get() as $value) {
+            array_push($questions, $value);
+            shuffle($questions);
+        }
+          return Inertia::render('MapQuiz/PlayQuiz', [
+
+
+            'quiz' => MapQuiz::where('id', $id)->get(),
+            'questions' => $questions,
+            'score' => $this->score,
+            'distance' => $distance,
+            'currentQuestion' => $currentq,
+
+        ]);
+
+
+
+
+
+    }
+    public function submitanswer(Request $request)
+    {
+
+
+
+
+
+
 
 
 
