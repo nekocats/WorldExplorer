@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\MapQuestion;
+use App\Models\MapQuiz;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class MapQuestionController extends Controller
 {
@@ -46,9 +48,40 @@ class MapQuestionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MapQuestion $mapQuestion)
+    public function show(MapQuestion $mapQuestion, $id)
     {
-        //
+        return Inertia::render('MapQuiz/PlayQuiz', [
+            'quiz' => MapQuiz::where('id', $id)->get(),
+            'id' => $id,
+
+        ]);
+    }
+
+    public $distance = null;
+    public function submitanswer(Request $request)
+    {
+        function haversineGreatCircleDistance(
+            $latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
+          {
+            // convert from degrees to radians
+            $latFrom = deg2rad($latitudeFrom);
+            $lonFrom = deg2rad($longitudeFrom);
+            $latTo = deg2rad($latitudeTo);
+            $lonTo = deg2rad($longitudeTo);
+
+            $latDelta = $latTo - $latFrom;
+            $lonDelta = $lonTo - $lonFrom;
+
+            $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+              cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+            return $angle * $earthRadius;
+          }
+          $mq = MapQuestion::where('id', $request->id)->first();
+
+        $this->distance = haversineGreatCircleDistance($request->lat, $request->lng, $mq->lat, $mq->lng);
+
+
+
     }
 
     /**

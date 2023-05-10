@@ -54,6 +54,8 @@ Route::name('quizmap.')->prefix('quizmap')->group(function () {
     })->name('getQuiz');
     Route::post('store', [MapQuestionController::class, 'store'])->name('store');
     Route::get('show/{id}', [MapQuizController::class, 'show'])->name('show');
+
+    Route::post('submitanswer', [MapQuizController::class, 'submitanswer'])->name('submitanswer');
 });
 
 Route::get('/quiz', function () {

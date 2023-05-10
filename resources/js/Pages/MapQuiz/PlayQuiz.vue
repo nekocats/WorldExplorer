@@ -1,6 +1,6 @@
 <script setup>
-import {Head, Link, useForm} from '@inertiajs/vue3'
-import { reactive, ref } from 'vue';
+import {Head, Link, useForm, router} from '@inertiajs/vue3'
+import { computed, reactive, ref, watch } from 'vue';
 import haversine from 'haversine-distance'
 
 const props = defineProps({
@@ -8,23 +8,41 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    questions: {
+        type: Object,
+        default: () => ({}),
+    },
+    distance: {
+        type: Object,
+        default: () => ({}),
+    },
+    currentQuestion: {
+        type: Object,
+        default: () => ({}),
+    },
 })
+console.log(props.quiz)
+console.log(props.questions)
 
+watch(
+  () => props.distance,
+  () => {
+    console.log(props.distance)
+  }
+)
 const score = ref(0)
 console.log(props.quiz)
 const questions = reactive([])
-props.quiz[0].questions.forEach(element => {
+props.questions.forEach(element => {
 questions.push(element)
 });
 const qCount = questions.length
-const currentQ = ref({current: 0})
+const currentQ = ref({current: props.currentQuestion})
 console.log(currentQ.value.current)
 const a = ref({lat: questions[currentQ.value.current].lat, lng: questions[currentQ.value.current].lng})
 console.log(questions)
 const guess = ref({lat: null, lng: null})
-
 let gameOver = false
-
 function mark(event) {
 guess.value.lat = event.latLng.lat()
 guess.value.lng = event.latLng.lng()
@@ -33,9 +51,6 @@ console.log(a.value)
 const answer = ref(haversine(a.value, guess.value))
 console.log(answer.value)
 if (gameOver == false) {
-
-
-
     if (gameOver == false && answer.value <= 50000) {
         score.value = score.value + 5000
     } else if(gameOver == false && answer.value > 50000 && answer.value < 100000) {
@@ -46,18 +61,29 @@ if (gameOver == false) {
     }
     if (qCount != currentQ.value.current + 1 && gameOver == false) {
         currentQ.value.current++
-
     }
-
     a.value.lat = questions[currentQ.value.current].lat
     a.value.lng = questions[currentQ.value.current].lng
     console.log(currentQ.value.current)
-
 }
+  }
+const form = useForm({
+  lat: null,
+  lng: null,
+  id: questions[currentQ.value.current].id,
+})
+function gMark(event) {
+    form.lat = event.latLng.lat()
+    form.lng = event.latLng.lng()
 
   }
 
 
+  function submit() {
+  router.post('/quizmap/submitanswer', form)
+
+}
+console.log(props.distance)
 </script>
 
 
@@ -78,13 +104,19 @@ if (gameOver == false) {
 
     </div>
     <GuestLayout class="scrollbar-none">
-    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" style="width: 100vw; height: 45rem" @click="mark">
-       <GMapMarker :position="{lat:guess.lat, lng:guess.lng}" :clickable="true"
+    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" style="width: 100vw; height: 45rem" @click="gMark">
+       <GMapMarker :position="{lat:form.lat, lng:form.lng}" :clickable="true"
           @click="openMarker(marker.id)" >
 
-          <div>
+          <GMapInfoWindow>
+            <form @submit.prevent="submit">
+
+        <div class="flex p-6 justify-center items-center">
+            <button class="p-6 border-4 border-lime-950  text-2xl justify-center items-center shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000" type="submit" :disabled="form.processing">Submit</button>
 
         </div>
+    </form>
+      </GMapInfoWindow>
 
           </GMapMarker>
            <!-- <GMapMarker  :position="{lat:questions[currentQ.current].lat, lng:questions[currentQ.current].lng}">

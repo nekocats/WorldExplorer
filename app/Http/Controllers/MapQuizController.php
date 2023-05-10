@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MapQuestion;
 use App\Models\MapQuiz;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class MapQuizController extends Controller
@@ -46,11 +48,50 @@ class MapQuizController extends Controller
     /**
      * Display the specified resource.
      */
+    public $questions = [];
+    public $currentq = 0;
+    public $score = 0;
+    public $distance = null;
     public function show(MapQuiz $mapQuiz, $id)
     {
+        foreach (MapQuestion::select('id', 'question')->where('map_quiz_id', $id)->get() as $value) {
+            array_push($this->questions, $value);
+            shuffle($this->questions);
+        }
         return Inertia::render('MapQuiz/PlayQuiz', [
-            'quiz' => MapQuiz::with('questions')->where('id', $id)->get()
+            'quiz' => MapQuiz::where('id', $id)->get(),
+            'questions' => $this->questions,
+            'score' => $this->score,
+            'distance' => $this->distance,
+            'currentQuestion' => $this->currentq
         ]);
+
+    }
+    public function submitanswer(Request $request)
+    {
+        function haversineGreatCircleDistance(
+            $latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
+          {
+            // convert from degrees to radians
+            $latFrom = deg2rad($latitudeFrom);
+            $lonFrom = deg2rad($longitudeFrom);
+            $latTo = deg2rad($latitudeTo);
+            $lonTo = deg2rad($longitudeTo);
+
+            $latDelta = $latTo - $latFrom;
+            $lonDelta = $lonTo - $lonFrom;
+
+            $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+              cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+            return $angle * $earthRadius;
+          }
+          $mq = MapQuestion::where('id', $request->id)->first();
+
+        $this->distance = haversineGreatCircleDistance($request->lat, $request->lng, $mq->lat, $mq->lng);
+        $this->currentq = $this->currentq + 1;
+
+
+
     }
 
     /**
