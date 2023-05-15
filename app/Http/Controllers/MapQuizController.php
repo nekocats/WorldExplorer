@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MapQuestion;
 use App\Models\MapQuiz;
+use Illuminate\Support\Facades\Cache;
 //use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -50,11 +51,18 @@ class MapQuizController extends Controller
      * Display the specified resource.
      */
 
-
-    public $score = 0;
+    public $questions = [];
 
     public function show(MapQuiz $mapQuiz, $id)
     {
+
+            foreach (MapQuestion::select('id', 'question')->where('map_quiz_id', $id)->get() as $value) {
+                array_push($this->questions, $value);
+                shuffle($this->questions);
+            }
+            Cache::add('key', $this->questions, 600);
+            $cacheQ = cache('key');
+
 
         function haversineGreatCircleDistance(
 
@@ -73,31 +81,48 @@ class MapQuizController extends Controller
               cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
             return $angle * $earthRadius;
           }
-          $currentq = null;
+
         if (Request::input('lat') == 0) {
             $distance = 0;
-            $currentq = 0;
+            $score = 0;
+            $location = array('lat' => 0, 'lng' => 0);
         }
         else {
-            $mq = MapQuestion::where('id', Request::input('id'))->first();
+
+            $mq = MapQuestion::where('id', $cacheQ[Request::input('currentq')]->id)->first();
             $distance = haversineGreatCircleDistance(Request::input('lat'), Request::input('lng'), $mq->lat, $mq->lng);
 
+            $score = 0;
+            Cache::add('score', $score, 600);
+            $cachedScore = cache('score');
+
+            if (Request::input('currentq') == count($this->questions)) {
+                Cache::flush();
+
+            }
+            if ($distance <= 50000) {
+                Cache::put('score', $cachedScore = $cachedScore + 5000);
+            } elseif ($distance > 50000) {
+                Cache::put('score', $cachedScore = $cachedScore + (50000 - $distance));
+
+            } elseif ($distance > 100000) {
+                $cachedScore = $cachedScore + 0;
+            }
+            $location = array('lat' => $mq->lat, 'lng' => $mq->lng);
         }
 
 
-        $questions = [];
-        foreach (MapQuestion::select('id', 'question')->where('map_quiz_id', $id)->get() as $value) {
-            array_push($questions, $value);
-            shuffle($questions);
-        }
+
+
           return Inertia::render('MapQuiz/PlayQuiz', [
 
 
             'quiz' => MapQuiz::where('id', $id)->get(),
-            'questions' => $questions,
-            'score' => $this->score,
+            'questions' => $cacheQ,
+            'score' => cache('score'),
             'distance' => $distance,
-            'currentQuestion' => $currentq,
+            'location' => $location,
+
 
         ]);
 
