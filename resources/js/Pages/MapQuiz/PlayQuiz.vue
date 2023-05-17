@@ -58,7 +58,7 @@ watch(
     console.log(props.currentQuestion)
   }
 )
-const score = ref(0)
+
 console.log(props.quiz)
 const questions = reactive([])
 props.questions.forEach(element => {
@@ -111,7 +111,7 @@ function gMark(event) {
 let answered = false
   function submit() {
 
-  router.get('/quizmap/show/2', form, {
+  router.post('/quizmap/show/2', form, {
     preserveState: true,
   })
   answered = true

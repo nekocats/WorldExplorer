@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\MapQuestion;
 use App\Models\MapQuiz;
+use App\Models\Score;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 //use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request;
@@ -52,16 +54,17 @@ class MapQuizController extends Controller
      */
 
     public $questions = [];
-
+    public $gameover = false;
     public function show(MapQuiz $mapQuiz, $id)
     {
+
 
             foreach (MapQuestion::select('id', 'question')->where('map_quiz_id', $id)->get() as $value) {
                 array_push($this->questions, $value);
                 shuffle($this->questions);
             }
-            Cache::add('key', $this->questions, 600);
-            $cacheQ = cache('key');
+            session(["key$id" => $this->questions]);
+            $sessionQ = session("key$id");
 
 
         function haversineGreatCircleDistance(
@@ -89,24 +92,37 @@ class MapQuizController extends Controller
         }
         else {
 
-            $mq = MapQuestion::where('id', $cacheQ[Request::input('currentq')]->id)->first();
+            $mq = MapQuestion::where('id', $sessionQ[Request::input('currentq')]->id)->first();
             $distance = haversineGreatCircleDistance(Request::input('lat'), Request::input('lng'), $mq->lat, $mq->lng);
 
             $score = 0;
-            Cache::add('score', $score, 600);
-            $cachedScore = cache('score');
+            session(["score$id" => $score]);
 
-            if (Request::input('currentq') == count($this->questions)) {
-                Cache::flush();
+            $sessionScore = session("score$id");
+
+            if (Request::input('currentq') == count($this->questions) - 1) {
+                $this->gameover = true;
 
             }
+            if ($this->gameover == true) {
+
+                $scorevalidate = Request::validate([
+                    'map_quiz_id' => $mapQuiz,
+                    'user_id' => Auth::id(),
+                    'score' => cache("score$id"),
+                ]);
+               Score::create($scorevalidate);
+                Cache::flush();
+            }
             if ($distance <= 50000) {
-                Cache::put('score', $cachedScore = $cachedScore + 5000);
-            } elseif ($distance > 50000) {
-                Cache::put('score', $cachedScore = $cachedScore + (50000 - $distance));
+                session(["score$id" => "score$id", $sessionScore = $sessionScore + 5000]);
+                dd($sessionScore);
+            } elseif ($distance > 50000 && $distance < 100000) {
+                session(["score$id" => "score$id", $sessionScore = $sessionScore + (10000 - ($distance / 10))]);
+
 
             } elseif ($distance > 100000) {
-                $cachedScore = $cachedScore + 0;
+                $sessionScore = $sessionScore + 0;
             }
             $location = array('lat' => $mq->lat, 'lng' => $mq->lng);
         }
@@ -118,8 +134,8 @@ class MapQuizController extends Controller
 
 
             'quiz' => MapQuiz::where('id', $id)->get(),
-            'questions' => $cacheQ,
-            'score' => cache('score'),
+            'questions' => $sessionQ,
+            'score' => session("score$id"),
             'distance' => $distance,
             'location' => $location,
 
