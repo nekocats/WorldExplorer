@@ -89,14 +89,15 @@ class MapQuizController extends Controller
             $distance = 0;
             $score = 0;
             $location = array('lat' => 0, 'lng' => 0);
+            session(["score$id" => $score]);
         }
         else {
 
             $mq = MapQuestion::where('id', $sessionQ[Request::input('currentq')]->id)->first();
             $distance = haversineGreatCircleDistance(Request::input('lat'), Request::input('lng'), $mq->lat, $mq->lng);
 
-            $score = 0;
-            session(["score$id" => $score]);
+
+
 
             $sessionScore = session("score$id");
 
@@ -106,23 +107,22 @@ class MapQuizController extends Controller
             }
             if ($this->gameover == true) {
 
-                $scorevalidate = Request::validate([
-                    'map_quiz_id' => $mapQuiz,
-                    'user_id' => Auth::id(),
-                    'score' => cache("score$id"),
-                ]);
-               Score::create($scorevalidate);
-                Cache::flush();
+
+               Score::create([
+                'map_quiz_id' => $id,
+                'user_id' => Auth::id(),
+                'score' => session("score$id"),
+            ]);
             }
             if ($distance <= 50000) {
-                session(["score$id" => "score$id", $sessionScore = $sessionScore + 5000]);
-                dd($sessionScore);
+                session(["score$id" =>  $sessionScore = $sessionScore + 5000]);
+
             } elseif ($distance > 50000 && $distance < 100000) {
-                session(["score$id" => "score$id", $sessionScore = $sessionScore + (10000 - ($distance / 10))]);
+                session(["score$id" =>  $sessionScore = $sessionScore + (10000 - ($distance / 10))]);
 
 
             } elseif ($distance > 100000) {
-                $sessionScore = $sessionScore + 0;
+                session(["score$id" =>  $sessionScore = $sessionScore + 0]);
             }
             $location = array('lat' => $mq->lat, 'lng' => $mq->lng);
         }
