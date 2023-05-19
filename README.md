@@ -1,5 +1,6 @@
-# HistoryGuesser
-## A game where you learn and try to guess famous historical landmarks.
+# WorldExplorer
+## Welcome to WorldExplorer, the addictive map guessing game! 
+## WorldExplorer is a game where you learn and try to guess famous historical landmarks.
 
 Main Menu               |  Game select
 :-------------------------:|:-------------------------:
