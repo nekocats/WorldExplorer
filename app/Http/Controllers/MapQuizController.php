@@ -58,12 +58,14 @@ class MapQuizController extends Controller
     public function show(MapQuiz $mapQuiz, $id)
     {
 
-
+        if (session()->has("key$id") != true) {
             foreach (MapQuestion::select('id', 'question')->where('map_quiz_id', $id)->get() as $value) {
                 array_push($this->questions, $value);
                 shuffle($this->questions);
             }
             session(["key$id" => $this->questions]);
+        }
+
             $sessionQ = session("key$id");
 
 
@@ -88,43 +90,61 @@ class MapQuizController extends Controller
         if (Request::input('lat') == 0) {
             $distance = 0;
             $score = 0;
-            $location = array('lat' => 0, 'lng' => 0);
+            $firstQ = 0;
+            $location = array('lat' => 999, 'lng' => 999);
             session(["score$id" => $score]);
+            session(["currentQ$id" => $firstQ]);
+
         }
         else {
+            function submitScore($amount, $gamestate, $id) {
+                if (session("currentQ$id") == $amount) {
+                    $gamestate = true;
 
-            $mq = MapQuestion::where('id', $sessionQ[Request::input('currentq')]->id)->first();
+                }
+                if ($gamestate == true) {
+
+
+                    Score::create([
+                     'map_quiz_id' => $id,
+                     'user_id' => Auth::id(),
+                     'score' => session("score$id"),
+                 ]);
+                 }
+            }
+
+            dd(session("currentQ$id"));
+            $mq = MapQuestion::where('id', $sessionQ[session("currentQ$id")]->id)->first();
+
             $distance = haversineGreatCircleDistance(Request::input('lat'), Request::input('lng'), $mq->lat, $mq->lng);
 
 
-
+            $sessionCurrentQ = session("currentQ$id");
 
             $sessionScore = session("score$id");
 
-            if (Request::input('currentq') == count($this->questions) - 1) {
-                $this->gameover = true;
-
-            }
-            if ($this->gameover == true) {
 
 
-               Score::create([
-                'map_quiz_id' => $id,
-                'user_id' => Auth::id(),
-                'score' => session("score$id"),
-            ]);
-            }
             if ($distance <= 50000) {
                 session(["score$id" =>  $sessionScore = $sessionScore + 5000]);
 
+                submitScore(count(session("key$id")) - 1, $this->gameover, $id);
+
             } elseif ($distance > 50000 && $distance < 100000) {
                 session(["score$id" =>  $sessionScore = $sessionScore + (10000 - ($distance / 10))]);
+                submitScore(count(session("key$id")) - 1, $this->gameover, $id);
 
 
             } elseif ($distance > 100000) {
                 session(["score$id" =>  $sessionScore = $sessionScore + 0]);
+                submitScore(count(session("key$id")) - 1, $this->gameover, $id);
             }
             $location = array('lat' => $mq->lat, 'lng' => $mq->lng);
+
+
+
+             session(["currentQ$id" => $sessionCurrentQ + 1]);
+
         }
 
 

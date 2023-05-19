@@ -100,7 +100,7 @@ const form = useForm({
   lat: null,
   lng: null,
   id: questions[currentQ.value.current].id,
-  currentq: currentQ.value.current,
+
 })
 function gMark(event) {
     form.lat = event.latLng.lat()
@@ -108,18 +108,17 @@ function gMark(event) {
 
   }
 
-let answered = false
+const answered = ref(0)
   function submit() {
-
+    answered.value = 1
   router.post('/quizmap/show/2', form, {
     preserveState: true,
   })
-  answered = true
+
 }
 function nextQ() {
     currentQ.value.current++
-form.currentq = form.currentq + 1
-answered = false
+    answered.value = 0
 }
 console.log(props.distance)
 </script>
@@ -147,8 +146,8 @@ console.log(props.distance)
           </GMapMarker>
        <GMapMarker :position="{lat:form.lat, lng:form.lng}">
         <div class=" absolute top-72 bg-gray-700 opacity-40 hover:opacity-70">
-            <button v-if="answered == true" @click="nextQ" class="w-64 h-36 text-3xl text-white">NEXT</button>
-            <form @submit.prevent="submit"><button type="submit" v-if="answered == false" :disabled="form.processing" class="w-64 h-36 text-3xl text-white">ANSWER</button></form>
+            <button v-if="answered == 1" @click="nextQ" class="w-64 h-36 text-3xl text-white">NEXT</button>
+            <form @submit.prevent="submit"><button type="submit" v-if="answered == 0" :disabled="form.processing" class="w-64 h-36 text-3xl text-white">ANSWER</button></form>
         </div>
 
 
