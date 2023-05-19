@@ -1,25 +1,27 @@
-<script setup> 
+<script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import axios from 'axios';
 
-defineProps({
-    canLogin: Boolean,
-    canRegister: Boolean,
-    laravelVersion: String,
-    phpVersion: String,
+const users = ref([]);
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('/api/users');
+    users.value = response.data;
+  } catch (error) {
+    console.error(error);
+  }
 });
-
-const testUser = {
-  name: "Pneuma",
-  score: "6996969"
-}
-
-const users = ref([...Array(10).keys()].map(() => testUser))
-
+const getUserImageUrl = (imagePath) => {
+  if (imagePath) {
+    return `/storage/${imagePath}`;
+  } else {
+  }
+};
 
 </script>
-<script setup lang="ts">
-</script>
+
 <template #header> 
 <AppLayout title="Ranking">
 
@@ -47,8 +49,7 @@ const users = ref([...Array(10).keys()].map(() => testUser))
                 <td class="px-20 py-4 border-b border-lime-950 text-lime-600 bg-materialgreenlight dark:bg-materialgreenbg">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-10 h-10">
-                      <img class="w-10 h-10 rounded-full"
-                        src="https://pbs.twimg.com/profile_images/1646588275245580289/GfyG6yxR_400x400.jpg" alt="" />
+                      <img :src="getUserImageUrl(u.profile_photo_path)" alt="User Profile Photo" class="w-10 h-10 rounded-full" />
                     </div>
 
                     <div class="ml-4">
