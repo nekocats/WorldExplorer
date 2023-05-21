@@ -26,11 +26,11 @@ const fetchScores = async () => {
         const highestScore = Math.max(...userScores.map((score) => score.score));
         user.score = highestScore.toFixed(0);
       } else {
-        user.score = 0; // Set a default score if user has no scores
+        user.score = 0;
       }
     });
 
-    users.value.sort((a, b) => b.score - a.score); // Sort users based on scores
+    users.value.sort((a, b) => b.score - a.score);
 
   } catch (error) {
     console.error(error);
