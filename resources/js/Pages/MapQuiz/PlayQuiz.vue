@@ -111,7 +111,7 @@ function gMark(event) {
 const answered = ref(0)
   function submit() {
     answered.value = 1
-  router.post('/quizmap/show/2', form, {
+  router.post('/quizmap/show/' + props.questions[0].map_quiz_id, form, {
     preserveState: true,
   })
 

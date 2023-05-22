@@ -59,11 +59,12 @@ class MapQuizController extends Controller
     {
 
         if (session()->has("key$id") != true) {
-            foreach (MapQuestion::select('id', 'question')->where('map_quiz_id', $id)->get() as $value) {
-                array_push($this->questions, $value);
-                shuffle($this->questions);
+            $questions = [];
+            foreach (MapQuestion::select('id', 'question', 'map_quiz_id')->where('map_quiz_id', $id)->get() as $value) {
+                array_push($questions, $value);
+                shuffle($questions);
             }
-            session(["key$id" => $this->questions]);
+            session(["key$id" => $questions]);
         }
 
             $sessionQ = session("key$id");
@@ -103,17 +104,22 @@ class MapQuizController extends Controller
 
                 }
                 if ($gamestate == true) {
+                    if (Score::where('user_id', Auth::id())->where('map_quiz_id', $id)->exists() && Score::where('user_id', Auth::id())->where('map_quiz_id', $id)->first()->score < session("score$id")) {
+                        Score::where('map_quiz_id', $id)
+                            ->where('user_id', Auth::id())
+                            ->update(['score' => session("score$id")]);
+                    } else {
+                        Score::firstOrCreate(
+                            ['map_quiz_id' => $id, 'user_id' => Auth::id()],
+                            ['score' => session("score$id")]
+                        );
+                    }
 
 
-                    Score::create([
-                     'map_quiz_id' => $id,
-                     'user_id' => Auth::id(),
-                     'score' => session("score$id"),
-                 ]);
                  }
             }
 
-            dd(session("currentQ$id"));
+
             $mq = MapQuestion::where('id', $sessionQ[session("currentQ$id")]->id)->first();
 
             $distance = haversineGreatCircleDistance(Request::input('lat'), Request::input('lng'), $mq->lat, $mq->lng);
