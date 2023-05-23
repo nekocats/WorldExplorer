@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Score;
-
+use App\Models\MapQuiz;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,4 +24,7 @@ Route::get('/users', function () {
 
 Route::get('/scores', function () {
     return Score::all();
+});
+Route::get('/map_quizzes', function () {
+    return MapQuiz::all();
 });

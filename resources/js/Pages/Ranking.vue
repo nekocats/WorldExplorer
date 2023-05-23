@@ -26,9 +26,11 @@ const fetchScores = async () => {
         const highestScore = Math.max(...userScores.map((score) => score.score));
         user.score = highestScore.toFixed(0);
       } else {
-        user.score = 0;
+        user.score = null;
       }
     });
+
+    users.value = users.value.filter((user) => user.score !== null);
 
     users.value.sort((a, b) => b.score - a.score);
 
