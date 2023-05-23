@@ -68,6 +68,7 @@ Route::name('quizmap.')->prefix('quizmap')->group(function () {
         ]);
     })->name('ranking');
 
+    Route::delete('destroy/{id}', [MapQuestionController::class,'destroy'])->name('destroy');
     Route::post('submitanswer', [MapQuizController::class, 'submitanswer'])->name('submitanswer');
 });
 

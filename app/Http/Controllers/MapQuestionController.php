@@ -103,8 +103,8 @@ class MapQuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MapQuestion $mapQuestion)
+    public function destroy(MapQuestion $mapQuestion, $id)
     {
-        $mapQuestion->delete();
+        MapQuestion::where('id', $id)->delete();
     }
 }

@@ -33,7 +33,7 @@ function mark(event) {
   }
 function destroy(id) {
     if (confirm("Are you sure you want to Delete")) {
-        formDel.delete(route('maps.destroy', id));
+        formDel.delete(route('quizmap.destroy', id));
     }
 }
 
@@ -55,6 +55,7 @@ function destroy(id) {
         </div>
 
         <EditForm :marker = marker></EditForm>
+        <DangerButton @click="destroy(marker.id)">DELETE</DangerButton>
         </GMapInfoWindow>
           </GMapMarker>
           <GMapMarker  :position="{lat:form.lat, lng:form.lng}">
