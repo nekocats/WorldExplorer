@@ -105,6 +105,6 @@ class MapQuestionController extends Controller
      */
     public function destroy(MapQuestion $mapQuestion)
     {
-        //
+        $mapQuestion->delete();
     }
 }

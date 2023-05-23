@@ -104,16 +104,20 @@ class MapQuizController extends Controller
 
                 }
                 if ($gamestate == true) {
-                    if (Score::where('user_id', Auth::id())->where('map_quiz_id', $id)->exists() && Score::where('user_id', Auth::id())->where('map_quiz_id', $id)->first()->score < session("score$id")) {
-                        Score::where('map_quiz_id', $id)
-                            ->where('user_id', Auth::id())
-                            ->update(['score' => session("score$id")]);
-                    } else {
-                        Score::firstOrCreate(
-                            ['map_quiz_id' => $id, 'user_id' => Auth::id()],
-                            ['score' => session("score$id")]
-                        );
+                    if (Auth::check()) {
+                        if (Score::where('user_id', Auth::id())->where('map_quiz_id', $id)->exists() && Score::where('user_id', Auth::id())->where('map_quiz_id', $id)->first()->score < session("score$id")) {
+                            Score::where('map_quiz_id', $id)
+                                ->where('user_id', Auth::id())
+                                ->update(['score' => session("score$id")]);
+                        } else {
+                            Score::firstOrCreate(
+                                ['map_quiz_id' => $id, 'user_id' => Auth::id()],
+                                ['score' => session("score$id")]
+                            );
+                        }
+
                     }
+
 
 
                  }

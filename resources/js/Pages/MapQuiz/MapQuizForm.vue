@@ -15,6 +15,7 @@ const props = defineProps({
 })
 
 console.log(props.quiz)
+console.log(props.markers[0].questions)
 console.log(props.markers)
     const form = useForm({
   question: null,
@@ -42,7 +43,7 @@ function destroy(id) {
     <Head title="Map Quiz Edit"/>
     <AppLayout>
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" style="width: 100vw; height: 20rem" @click="mark">
-       <GMapMarker :key="marker.id" v-for="marker in markers" :position="{lat:marker.lat, lng:marker.lng}" :clickable="true"
+       <GMapMarker :key="marker.id" v-for="marker in markers[0].questions" :position="{lat:marker.lat, lng:marker.lng}" :clickable="true"
           @click="openMarker(marker.id)" >
             <GMapInfoWindow
             :closeclick="true"

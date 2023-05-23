@@ -4,6 +4,7 @@ use App\Http\Controllers\MapQuestionController;
 use App\Http\Controllers\MapQuizController;
 use App\Models\MapQuiz;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -39,7 +40,7 @@ Route::get('/gameselect', function () {
 
 Route::get('/mapquizzes', function () {
     return Inertia::render('MapQuiz/Quizzes', [
-        'quizzes' => MapQuiz::all()
+        'quizzes' => MapQuiz::where('user_id', Auth::id())->get()
     ]);
 })->name('mapquizzes');
 
@@ -50,6 +51,7 @@ Route::name('quizmap.')->prefix('quizmap')->group(function () {
     Route::get('/{id}', function (string $id) {
         return Inertia::render('MapQuiz/MapQuizForm', [
             'quiz' => $id,
+            'markers' => MapQuiz::where('id', $id)->with('questions')->get()
         ]);
     })->name('getQuiz');
     Route::post('store', [MapQuestionController::class, 'store'])->name('store');
