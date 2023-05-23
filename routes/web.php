@@ -4,6 +4,7 @@ use App\Http\Controllers\MapQuestionController;
 use App\Http\Controllers\MapQuizController;
 use App\Models\MapQuiz;
 use App\Models\Score;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -51,7 +52,12 @@ Route::get('/choosemapquiz', [MapQuizController::class, 'index'])->name('chooseq
 Route::name('quizmap.')->prefix('quizmap')->group(function () {
 
 
-
+    Route::get('ranking/{id}', function (string $id) {
+        return Inertia::render('Ranking', [
+            'users' => User::all(),
+            'scores' => Score::where('map_quiz_id', $id)->get()
+        ]);
+    })->name('ranking');
     Route::get('/{id}', function (string $id) {
         return Inertia::render('MapQuiz/MapQuizForm', [
             'quiz' => $id,
@@ -61,12 +67,7 @@ Route::name('quizmap.')->prefix('quizmap')->group(function () {
     Route::post('store', [MapQuestionController::class, 'store'])->name('store');
     Route::get('show/{id}', [MapQuizController::class, 'show'])->name('show');
     Route::post('show/{id}', [MapQuizController::class, 'show'])->name('show');
-    Route::get('ranking/{id}', function (string $id) {
-        return Inertia::render('Ranking', [
 
-            'scores' => Score::where('map_quiz_id', $id)->get()
-        ]);
-    })->name('ranking');
 
     Route::delete('destroy/{id}', [MapQuestionController::class,'destroy'])->name('destroy');
     Route::post('submitanswer', [MapQuizController::class, 'submitanswer'])->name('submitanswer');

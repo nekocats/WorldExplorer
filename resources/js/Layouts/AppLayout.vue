@@ -56,10 +56,8 @@ const logout = () => {
                                     Profile Management
                                 </NavLink>
 
-                                
-                                <NavLink :href="route('ranking')" :active="route().current('ranking')">
-                                    Leaderboard
-                                </NavLink>
+
+
 
                                 <NavLink :href="route('mapquizzes')" :active="route().current('mapquizzes')">
                                     Add Map Quiz Data

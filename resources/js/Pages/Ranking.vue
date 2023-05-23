@@ -3,6 +3,17 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import { ref, onMounted } from "vue";
 import axios from 'axios';
 
+const props = defineProps({
+    users: {
+        type: Object,
+        default: () => ({}),
+    },
+    scores: {
+        type: Object,
+        default: () => ({}),
+    },
+})
+
 const users = ref([]);
 
 onMounted(async () => {
@@ -73,7 +84,7 @@ const getUserImageUrl = (imagePath) => {
                 <td class="px-20 py-4 border-b border-lime-950 text-lime-600 bg-materialgreenlight dark:bg-materialgreenbg">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-30 h-30">
-                      <img :src="getUserImageUrl(u.profile_photo_path)" alt="User Profile Photo" class="w-20 h-20 rounded-full object-cover" />
+                      <img :src="u.profile_photo_path" alt="User Profile Photo" class="w-20 h-20 rounded-full object-cover" />
                     </div>
                     <div class="ml-4">
                       <div class="text-[30px] font-medium leading-5 pl-6 text-lime-600">
