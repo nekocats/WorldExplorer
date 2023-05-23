@@ -64,7 +64,7 @@ const getUserImageUrl = (imagePath) => {
                   Player:
                 </th>
                 <th class="pl-5">
-                  Score
+                  Score 
                 </th>
               </tr>
               </thead>
