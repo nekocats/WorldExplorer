@@ -9,4 +9,6 @@ class Score extends Model
 {
     protected $guarded = [];
     use HasFactory;
+
 }
+
