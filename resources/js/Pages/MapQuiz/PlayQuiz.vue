@@ -127,26 +127,31 @@ console.log(props.distance)
 
 <template class="whitespace-nowrap overflow-hidden w-24 scrollbar-none">
     <Head title="Map Quiz"/>
-  <div class='relative  whitespace-nowrap overflow-hidden overscroll-none scrollbar-none bg-frontPageBg bg-cover grid  min-h-screen bg-dots-darker bg-materialgreenlight bg-center dark:bg-materialgreenbg selection:bg-lime-950 selection:text-white'>
 
 
-      <div class="flex justify-between items-center pl-6 text-lime-700">
-          <Link data-te-toggle="tooltip" title="Back to quiz chooser" :href="route('choosequiz')" class="scrollbar-none flex text-2xl p-4 justify-items-right items-right py-4 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000 text-shadow shadow-black font-raleway text-lime-700 dark:text-white text-right rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-              </svg>
-          </Link> <br>
 
-        <h1 class="dark:text-shadow shadow-black font-raleway box-border text-5xl dark:text-white">{{ questions[currentQ.current].question }}</h1>
-        <h1 class="dark:text-shadow shadow-black font-raleway box-border text-5xl text-lime-700  rounded-lg font-bold pr-10">Score: {{ score }}</h1>
 
-    </div>
+
     <GuestLayout class="scrollbar-none">
-    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" style="width: 100vw; height: 45rem" @click="gMark">
+    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" style="width: 100vw; height: 56.89rem" @click="gMark">
         <GMapMarker   :position="{lat:location.lat, lng:location.lng}">
           </GMapMarker>
        <GMapMarker :position="{lat:form.lat, lng:form.lng}">
-        <div class=" absolute top-72 bg-lime-600">
+           <div class="absolute top-0 inset-x-96 flex filter backdrop-blur-md bg-white/30 p-5 items-center align-center  rounded-b-3xl">
+               <h1 class="dark:text-shadow shadow-black font-raleway box-border text-5xl dark:text-white">{{ questions[currentQ.current].question }}</h1>
+               <h1 class="dark:text-shadow shadow-black font-raleway box-border text-5xl text-lime-700  rounded-lg font-bold pl-24">Score: {{ score }}</h1>
+           </div>
+
+
+           <div class=" absolute top-4 left-72 flex backdrop-blur-sm bg-white/30 rounded-3xl ">
+               <Link data-te-toggle="tooltip" title="Back to quiz chooser" :href="route('choosequiz')" class="scrollbar-none flex text-2xl p-4 justify-items-right items-right py-4 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000 text-shadow shadow-black font-raleway text-lime-700 dark:text-white text-right rounded-lg">
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                   </svg>
+               </Link> <br>
+              </div>
+
+        <div class=" absolute flex bottom-5  inset-x-[50rem]  backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl">
             <button v-if="answered == 1" @click="nextQ" class="w-64 h-36 text-3xl text-white">NEXT</button>
             <form @submit.prevent="submit"><button type="submit" v-if="answered == 0" :disabled="form.processing" class="w-64 h-36 text-3xl text-white">ANSWER</button></form>
         </div>
@@ -156,7 +161,7 @@ console.log(props.distance)
 
     </GMapMap>
 </GuestLayout>
-</div>
+
   </template>
 
   <script>
