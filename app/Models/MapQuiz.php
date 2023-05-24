@@ -13,6 +13,11 @@ class MapQuiz extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
 
     protected $guarded = [];
+    protected $appends = ['image'];
+
+    public function getImageAttribute(){
+        return $this->getFirstMediaUrl('images');
+    }
     public function questions(): HasMany
     {
         return $this->hasMany(MapQuestion::class);
