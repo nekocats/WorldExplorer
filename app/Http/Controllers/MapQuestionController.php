@@ -51,7 +51,7 @@ class MapQuestionController extends Controller
     public function show(MapQuestion $mapQuestion, $id)
     {
         return Inertia::render('MapQuiz/PlayQuiz', [
-            'quiz' => MapQuiz::where('id', $id)->get(),
+            'quiz' => MapQuiz::where('id', $id)->with('image')->get(),
             'id' => $id,
 
         ]);
