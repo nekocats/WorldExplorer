@@ -1,7 +1,7 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { ref, onMounted } from "vue";
-import axios from 'axios';
+
 
 const props = defineProps({
     users: {
@@ -14,41 +14,6 @@ const props = defineProps({
     },
 })
 
-const users = ref([]);
-
-onMounted(async () => {
-  try {
-    const response = await axios.get('/api/users');
-    users.value = response.data;
-    await fetchScores();
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-const fetchScores = async () => {
-  try {
-    const response = await axios.get('/api/scores');
-    const scores = response.data;
-
-    users.value.forEach((user) => {
-      const userScores = scores.filter((score) => score.user_id === user.id);
-      if (userScores.length > 0) {
-        const highestScore = Math.max(...userScores.map((score) => score.score));
-        user.score = highestScore.toFixed(0);
-      } else {
-        user.score = null;
-      }
-    });
-
-    users.value = users.value.filter((user) => user.score !== null);
-
-    users.value.sort((a, b) => b.score - a.score);
-
-  } catch (error) {
-    console.error(error);
-  }
-};
 
 const getUserImageUrl = (imagePath) => {
   if (imagePath) {
@@ -57,6 +22,9 @@ const getUserImageUrl = (imagePath) => {
     return '/default-profile-photo.jpg';
   }
 };
+console.log(props.users)
+
+
 </script>
 
 <template #header>
@@ -75,26 +43,26 @@ const getUserImageUrl = (imagePath) => {
                   Player:
                 </th>
                 <th class="pl-5">
-                  Score 
+                  Score
                 </th>
               </tr>
               </thead>
               <tbody class="bg-materialgreenlight dark:bg-materialgreenbg">
-              <tr v-for="(u, index) in users" :key="index">
+              <tr v-for="score in scores" :key="score.id">
                 <td class="px-20 py-4 border-b border-lime-950 text-lime-600 bg-materialgreenlight dark:bg-materialgreenbg">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-30 h-30">
-                      <img :src="u.profile_photo_path" alt="User Profile Photo" class="w-20 h-20 rounded-full object-cover" />
+                      <img alt="User Profile Photo" :src="getUserImageUrl(score.user.profile_photo_path)" class="w-20 h-20 rounded-full object-cover" />
                     </div>
                     <div class="ml-4">
                       <div class="text-[30px] font-medium leading-5 pl-6 text-lime-600">
-                        {{ u.name }}
+                        <span>{{ score.user.name }}</span>
                       </div>
                     </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 text-[40px] leading-5 text-lime-600 border-b border-lime-950">
-                  {{ u.score }}
+                  {{ score.score }}
                 </td>
               </tr>
               </tbody>
