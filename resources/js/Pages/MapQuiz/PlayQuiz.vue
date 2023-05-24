@@ -142,13 +142,13 @@ console.log(props.distance)
           </GMapMarker>
        <GMapMarker :position="{lat:form.lat, lng:form.lng}">
            <div class="absolute top-0 inset-x-96 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-5 items-center align-center  rounded-b-3xl">
-               <h1 class=" font-raleway box-border text-4xl dark:text-white">{{ questions[currentQ.current].question }}</h1>
+               <h1 class=" font-raleway box-border text-4xl text-white">{{ questions[currentQ.current].question }}</h1>
                <h1 class=" font-raleway box-border text-4xl text-lime-200  rounded-lg font-bold pl-24">Score: {{ score }}</h1>
            </div>
 
 
            <div class=" absolute top-4 left-72 flex backdrop-blur-sm bg-white/30 rounded-3xl ">
-               <Link data-te-toggle="tooltip" title="Back to quiz chooser" :href="route('choosequiz')" class="scrollbar-none flex text-2xl p-4 justify-items-right items-right py-4 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000 text-shadow shadow-black font-raleway text-lime-700 dark:text-white text-right rounded-lg">
+               <Link data-te-toggle="tooltip" title="Back to quiz chooser" :href="route('choosequiz')" class="scrollbar-none flex text-2xl p-4  py-4 font-raleway text-white rounded-lg">
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                    </svg>
