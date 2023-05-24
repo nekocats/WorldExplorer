@@ -37,6 +37,8 @@ console.log(props.location)
 watch(
   () => props.location,
   () => {
+    center.lat = props.location.lat
+    center.lng = props.location.lng
     console.log(props.location)
   }
 )
@@ -95,6 +97,7 @@ if (gameOver == false) {
     console.log(currentQ.value.current)
 }
   }
+ const center = reactive({ lat: 58.2449205980223, lng: 22.496933575606914 })
 const currentId = ref(0)
 const form = useForm({
   lat: null,
@@ -111,6 +114,7 @@ function gMark(event) {
 const answered = ref(0)
   function submit() {
     answered.value = 1
+
   router.post('/quizmap/show/' + props.questions[0].map_quiz_id, form, {
     preserveState: true,
   })
@@ -163,21 +167,3 @@ console.log(props.distance)
 </GuestLayout>
 
   </template>
-
-  <script>
-    export default {
-    data() {
-      return {
-        openedMarkerID: null,
-        center: { lat: 58.2449205980223, lng: 22.496933575606914 },
-
-      };
-    },
-    methods: {
-      openMarker(id) {
-         this.openedMarkerID = id
-      },
-
-    }
-  };
-  </script>
