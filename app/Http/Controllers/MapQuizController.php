@@ -40,6 +40,7 @@ class MapQuizController extends Controller
         $validated = Request::validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:500',
+            'user_id' => 'required'
         ]);
        $mapquizzes = MapQuiz::create($validated);
         if ($images = Request::file('images')) {

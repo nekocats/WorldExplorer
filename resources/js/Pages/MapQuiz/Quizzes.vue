@@ -2,7 +2,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { useForm, Head, Link } from '@inertiajs/vue3';
+import { useForm, usePage, Head, Link } from '@inertiajs/vue3';
 const props = defineProps({
 
     quizzes: {
@@ -10,11 +10,14 @@ const props = defineProps({
         default: () => ({}),
     },
 })
+
 console.log(props.quizzes)
+
 const form = useForm({
     title: '',
     description: '',
     images: null,
+    user_id: usePage().props.auth.user.id,
 });
 </script>
 
@@ -24,14 +27,14 @@ const form = useForm({
         <div class="max-w-2xl mx-auto p-8 sm:p-6 lg:p-8">
             <form @submit.prevent="form.post(route('mapquiz.store'), { onSuccess: () => form.reset() })">
 
-                <div class="py-6">
+                <div class="py-6 text-white">
                     <input placeholder="Title" type="text" v-model="form.title" class="block w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm">
                 </div>
 
                 <textarea
                     v-model="form.description"
                     placeholder="Description"
-                    class="block w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                    class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"
                 ></textarea>
                 <div class="flex items-center text-center">
                         <input type="file" name="images[]" multiple @input="form.images = $event.target.files" class="py-6 text-lime-100"/>
