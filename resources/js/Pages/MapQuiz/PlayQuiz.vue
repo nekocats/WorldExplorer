@@ -146,7 +146,7 @@ console.log(props.distance)
         <GMapMarker   :position="{lat:location.lat, lng:location.lng}">
           </GMapMarker>
        <GMapMarker :position="{lat:form.lat, lng:form.lng}">
-        <div class=" absolute top-72 bg-gray-700 opacity-40 hover:opacity-70">
+        <div class=" absolute top-72 bg-lime-600">
             <button v-if="answered == 1" @click="nextQ" class="w-64 h-36 text-3xl text-white">NEXT</button>
             <form @submit.prevent="submit"><button type="submit" v-if="answered == 0" :disabled="form.processing" class="w-64 h-36 text-3xl text-white">ANSWER</button></form>
         </div>
