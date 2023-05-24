@@ -118,7 +118,7 @@ class MapQuizController extends Controller
                         }
 
                     }
-                    
+
 
 
                  }
