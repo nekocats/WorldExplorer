@@ -133,13 +133,13 @@ console.log(props.distance)
 
 
     <GuestLayout class="scrollbar-none">
-    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" style="width: 100vw; height: 56.89rem" @click="gMark">
+    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" class="h-screen w-screen"  @click="gMark">
         <GMapMarker   :position="{lat:location.lat, lng:location.lng}">
           </GMapMarker>
        <GMapMarker :position="{lat:form.lat, lng:form.lng}">
-           <div class="absolute top-0 inset-x-96 flex filter backdrop-blur-md bg-white/30 p-5 items-center align-center  rounded-b-3xl">
-               <h1 class="dark:text-shadow shadow-black font-raleway box-border text-5xl dark:text-white">{{ questions[currentQ.current].question }}</h1>
-               <h1 class="dark:text-shadow shadow-black font-raleway box-border text-5xl text-lime-700  rounded-lg font-bold pl-24">Score: {{ score }}</h1>
+           <div class="absolute top-0 inset-x-96 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-5 items-center align-center  rounded-b-3xl">
+               <h1 class=" font-raleway box-border text-4xl dark:text-white">{{ questions[currentQ.current].question }}</h1>
+               <h1 class=" font-raleway box-border text-4xl text-lime-200  rounded-lg font-bold pl-24">Score: {{ score }}</h1>
            </div>
 
 
@@ -151,9 +151,9 @@ console.log(props.distance)
                </Link> <br>
               </div>
 
-        <div class=" absolute flex bottom-5  inset-x-[50rem]  backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl">
-            <button v-if="answered == 1" @click="nextQ" class="w-64 h-36 text-3xl text-white">NEXT</button>
-            <form @submit.prevent="submit"><button type="submit" v-if="answered == 0" :disabled="form.processing" class="w-64 h-36 text-3xl text-white">ANSWER</button></form>
+        <div class=" absolute flex bottom-5 justify-center inset-x-[50rem]  backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl">
+            <button v-if="answered == 1" @click="nextQ" class="w-32 h-16 text-2xl text-white">NEXT</button>
+            <form @submit.prevent="submit"><button type="submit" v-if="answered == 0" :disabled="form.processing" class="w-32 h-16  text-2xl text-white">ANSWER</button></form>
         </div>
 
 
