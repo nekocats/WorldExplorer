@@ -141,10 +141,10 @@ console.log(props.distance)
         <GMapMarker   :position="{lat:location.lat, lng:location.lng}">
           </GMapMarker>
        <GMapMarker :position="{lat:form.lat, lng:form.lng}">
-           <div class="absolute top-0 inset-x-96 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-5 items-center align-center  rounded-b-3xl">
-               <h1 class=" font-raleway box-border text-4xl text-white">{{ questions[currentQ.current].question }}</h1>
-               <h1 class=" font-raleway box-border text-4xl text-lime-200  rounded-lg font-bold pl-24">Score: {{ score }}</h1>
-           </div>
+        <div class="absolute top-0 inset-x-96 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-5 items-center align-center rounded-b-3xl">
+    <h1 class="font-raleway box-border text-4xl text-white">{{ questions[currentQ.current].question }}</h1>
+    <h1 class="font-raleway box-border text-4xl text-lime-200 rounded-lg font-bold pl-24">Score: {{ Math.round(score) }}</h1>
+  </div>
 
 
            <div class=" absolute top-4 left-72 flex backdrop-blur-sm bg-white/30 rounded-3xl ">
