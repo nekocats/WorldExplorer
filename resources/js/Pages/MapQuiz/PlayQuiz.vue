@@ -165,7 +165,7 @@ console.log(questions.length)
 
           </GMapMarker>
           <div v-if="currentQ.current == questions.length - 1 && answered == 1" class="absolute inset-1/4 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-5 items-center align-center rounded-3xl">
-
+            <h1 class="font-raleway box-border text-4xl text-lime-200 rounded-lg font-bold pl-24">Score: {{ Math.round(score) }}</h1>
            </div>
 
     </GMapMap>
