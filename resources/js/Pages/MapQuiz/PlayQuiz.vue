@@ -164,7 +164,7 @@ console.log(questions.length)
 
 
           </GMapMarker>
-          <div v-if="currentQ.current == questions.length - 1" class="absolute inset-1/4 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-5 items-center align-center rounded-3xl">
+          <div v-if="currentQ.current == questions.length - 1 && answered == 1" class="absolute inset-1/4 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-5 items-center align-center rounded-3xl">
 
            </div>
 
