@@ -125,6 +125,8 @@ function nextQ() {
     answered.value = 0
 }
 console.log(props.distance)
+console.log(currentQ.value.current)
+console.log(questions.length)
 </script>
 
 
@@ -162,6 +164,9 @@ console.log(props.distance)
 
 
           </GMapMarker>
+          <div v-if="currentQ.current == questions.length - 1" class="absolute inset-1/4 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-5 items-center align-center rounded-3xl">
+
+           </div>
 
     </GMapMap>
 </GuestLayout>
