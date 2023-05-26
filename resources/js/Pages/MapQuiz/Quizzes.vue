@@ -16,7 +16,6 @@ console.log(props.quizzes)
 const form = useForm({
     title: '',
     description: '',
-    images: null,
     user_id: usePage().props.auth.user.id,
 });
 </script>
@@ -36,9 +35,6 @@ const form = useForm({
                     placeholder="Description"
                     class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"
                 ></textarea>
-                <div class="flex items-center text-center">
-                        <input type="file" name="images[]" multiple @input="form.images = $event.target.files" class="py-6 text-lime-100"/>
-                    </div>
                 <InputError :message="form.errors.title" class="mt-2" />
                 <PrimaryButton class="mt-4 p-6 ">Add</PrimaryButton>
             </form>
