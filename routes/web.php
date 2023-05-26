@@ -58,16 +58,16 @@ Route::name('quizmap.')->prefix('quizmap')->group(function () {
             'scores' => Score::where('map_quiz_id', $id)->with('user')->orderBy('score', 'desc')->get()
         ]);
     })->name('ranking');
-    Route::get('finish/{id}', function (string $id) {
-        return Inertia::render('Finish', [
-            'endScore' => cache("endScore$id")
-        ]);
-    })->name('finish');
     Route::get('/{id}', function (string $id) {
-        return Inertia::render('MapQuiz/MapQuizForm', [
-            'quiz' => $id,
-            'markers' => MapQuiz::where('id', $id)->with('questions')->get()
-        ]);
+        if (MapQuiz::where('id', $id)->first()->user_id == Auth::id()) {
+            return Inertia::render('MapQuiz/MapQuizForm', [
+                'quiz' => $id,
+                'markers' => MapQuiz::where('id', $id)->with('questions')->get()
+            ]);
+        } else {
+            return redirect()->back();
+        }
+
     })->name('getQuiz');
 
 
