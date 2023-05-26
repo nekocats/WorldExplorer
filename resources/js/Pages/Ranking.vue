@@ -62,7 +62,7 @@ console.log(props.users)
                   </div>
                 </td>
                 <td class="px-6 py-4 text-[40px] leading-5 text-lime-600 border-b border-lime-950">
-                  {{ score.score }}
+                  {{ Math.round(score.score) }} 
                 </td>
               </tr>
               </tbody>
