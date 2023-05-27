@@ -2,6 +2,8 @@
 import {Head, Link, useForm, router} from '@inertiajs/vue3'
 import { computed, reactive, ref, watch } from 'vue';
 import haversine from 'haversine-distance'
+import answerIcon from "./Icons/icons8-map-pin-48.png"
+import guessIcon from "./Icons/guess.png"
 
 const props = defineProps({
     quiz: {
@@ -97,6 +99,11 @@ function nextQ() {
     currentQ.value.current++
     answered.value = 0
 }
+
+
+
+
+
 </script>
 
 
@@ -110,11 +117,15 @@ function nextQ() {
 
     <GuestLayout class="scrollbar-none">
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" class="h-screen w-screen"  @click="gMark">
-        <GMapMarker   :position="{lat:location.lat, lng:location.lng}">
+        <GMapMarker :icon="answerIcon"   :position="{lat:location.lat, lng:location.lng}" v-if="answered == 1">
           </GMapMarker>
-       <GMapMarker :position="{lat:form.lat, lng:form.lng}">
+          <GMapPolyline v-if="answered == 1"
+      :path="[{lat:form.lat, lng:form.lng}, {lat:location.lat, lng:location.lng}]"
+        ref="polyline" />
+       <GMapMarker :icon="guessIcon" :position="{lat:form.lat, lng:form.lng}">
         <div class="absolute top-0 inset-x-96 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-5 items-center align-center rounded-b-3xl">
     <h1 class="font-raleway box-border text-4xl text-white">{{ questions[currentQ.current].question }}</h1>
+
     <h1 class="font-raleway box-border text-4xl text-lime-200 rounded-lg font-bold pl-24">Score: {{ Math.round(score) }}</h1>
   </div>
 
