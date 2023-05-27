@@ -1,7 +1,9 @@
 <script setup>
 import {Head, useForm} from '@inertiajs/vue3'
-    import EditForm from './Edit.vue'
-    import AppLayout from '@/Layouts/AppLayout.vue';
+import EditForm from './Edit.vue'
+import AppLayout from '@/Layouts/AppLayout.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import DangerButton from '@/Components/DangerButton.vue';
 
 const props = defineProps({
     markers: {
@@ -42,7 +44,7 @@ function destroy(id) {
 <template>
     <Head title="Map Quiz Edit"/>
     <AppLayout>
-    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" style="width: 100vw; height: 20rem" @click="mark">
+    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" style="width: 100vw; height: 33rem" @click="mark">
        <GMapMarker :key="marker.id" v-for="marker in markers[0].questions" :position="{lat:marker.lat, lng:marker.lng}" :clickable="true"
           @click="openMarker(marker.id)" >
             <GMapInfoWindow
@@ -62,28 +64,29 @@ function destroy(id) {
           </GMapMarker>
     </GMapMap>
     <form @submit.prevent="form.post('store')">
-    <div class="flex items-center text-center text-white fill-black bg-materialgreenbg p-6 text-2xl items-center justify-center">
+    <div class="flex items-center text-center text-white fill-black bg-materialgreenbg p-5 text-xl items-center justify-center">
         Question:
         <div class="p-2">
-            <input class="text-white fill-black bg-materialgreenbg text-white border-4 border-lime-950 shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000" type="text" v-model="form.question">
+            <textarea v-model="form.question" placeholder="Question" class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
         </div>
         Latitude:
         <div class="p-2">
-            <input class="text-white fill-black bg-materialgreenbg text-white border-4 border-lime-950 shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000" type="text" v-model="form.lat">
-        </div>
+            <textarea v-model="form.lat" placeholder="Latitude" class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
+           </div>
         Longitude:
         <div class="p-2">
-            <input class="text-white fill-black bg-materialgreenbg text-white border-4 border-lime-950 shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000" type="text" v-model="form.lng">
+            <textarea v-model="form.long" placeholder="Longitude" class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
+
         </div>
 
 
     </div>
     <div class="flex items-center text-center text-white justify-center">
-                        <input class="p-6" type="file" name="images[]" multiple @input="form.images = $event.target.files" />
+                        <input class="p-2 c" type="file" name="images[]" multiple @input="form.images = $event.target.files" />
                     </div>
 
         <div class="flex p-6 justify-center items-center">
-            <button class="text-white p-6 border-4 border-lime-950  text-2xl justify-center items-center shadow-2xl shadow-lime-950 hover:shadow-lime-700 hover:border-lime-700 rounded-lg hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000" type="submit" :disabled="form.processing">Add new map data</button>
+            <PrimaryButton class="mt-4 p-6 " type="submit" :disabled="form.processing">Add new map data</PrimaryButton>
 
         </div>
     </form>

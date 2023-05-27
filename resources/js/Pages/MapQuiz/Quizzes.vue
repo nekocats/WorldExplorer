@@ -38,11 +38,7 @@ function destroy(id) {
                     <input placeholder="Title" type="text" v-model="form.title" class="block w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm">
                 </div>
 
-                <textarea
-                    v-model="form.description"
-                    placeholder="Description"
-                    class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                ></textarea>
+                <textarea v-model="form.description" placeholder="Description" class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
                 <InputError :message="form.errors.title" class="mt-2" />
                 <PrimaryButton class="mt-4 p-6 ">Add</PrimaryButton>
             </form>
