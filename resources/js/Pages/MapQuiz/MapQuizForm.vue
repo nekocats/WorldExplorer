@@ -67,15 +67,15 @@ function destroy(id) {
     <div class="flex items-center text-center text-white fill-black bg-materialgreenbg p-5 text-xl items-center justify-center">
         Question:
         <div class="p-2">
-            <textarea v-model="form.question" placeholder="Question" class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
+            <input v-model="form.question" placeholder="Question" class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm">
         </div>
         Latitude:
         <div class="p-2">
-            <textarea v-model="form.lat" placeholder="Latitude" class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
+            <input v-model="form.lat" placeholder="Latitude" class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm">
            </div>
         Longitude:
         <div class="p-2">
-            <textarea v-model="form.long" placeholder="Longitude" class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
+            <input v-model="form.long" placeholder="Longitude" class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm">
 
         </div>
 
