@@ -30,79 +30,52 @@ const props = defineProps({
     },
 
 })
-console.log(props.quiz)
-console.log(props.questions)
-console.log(props.location)
 
 watch(
   () => props.location,
   () => {
     center.lat = props.location.lat
     center.lng = props.location.lng
-    console.log(props.location)
+
   }
 )
 watch(
   () => props.distance,
   () => {
-    console.log(props.distance)
+
   }
 )
 watch(
   () => props.score,
   () => {
-    console.log(props.score)
+
   }
 )
 watch(
   () => props.currentQuestion,
   () => {
-    console.log(props.currentQuestion)
+
   }
 )
 
-console.log(props.quiz)
-const questions = reactive([])
-props.questions.forEach(element => {
-questions.push(element)
-});
-const qCount = questions.length
+
+
 const currentQ = ref({current: 0})
-console.log(currentQ.value.current)
-// const a = ref({lat: questions[currentQ.value.current].lat, lng: questions[currentQ.value.current].lng})
-console.log(questions)
+
+
 const guess = ref({lat: null, lng: null})
-let gameOver = false
+
 function mark(event) {
 guess.value.lat = event.latLng.lat()
 guess.value.lng = event.latLng.lng()
-console.log(guess.value)
-console.log(a.value)
-const answer = ref(haversine(a.value, guess.value))
-console.log(answer.value)
-if (gameOver == false) {
-    if (gameOver == false && answer.value <= 50000) {
-        score.value = score.value + 5000
-    } else if(gameOver == false && answer.value > 50000 && answer.value < 100000) {
-        score.value = score.value + 10000 - Math.round(answer.value / 10)
-    }
-    if (qCount == currentQ.value.current + 1) {
-        gameOver = true
-    }
-    if (qCount != currentQ.value.current + 1 && gameOver == false) {
-        currentQ.value.current++
-    }
-    a.value.lat = questions[currentQ.value.current].lat
-    a.value.lng = questions[currentQ.value.current].lng
-    console.log(currentQ.value.current)
-}
+
   }
  const center = reactive({ lat: 58.2449205980223, lng: 22.496933575606914 })
 const currentId = ref(0)
 const form = useForm({
   lat: null,
   lng: null,
-  id: questions[currentQ.value.current].id,
+  id: props.questions[currentQ.value.current].id,
 
 })
 function gMark(event) {
@@ -124,9 +97,6 @@ function nextQ() {
     currentQ.value.current++
     answered.value = 0
 }
-console.log(props.distance)
-console.log(currentQ.value.current)
-console.log(questions.length)
 </script>
 
 

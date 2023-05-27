@@ -56,7 +56,7 @@ function destroy(id) {
             <p>{{marker.description}}</p>
         </div>
 
-        <EditForm :marker = marker></EditForm>
+        <h1 class="pb-3">{{ marker.question }}</h1>
         <DangerButton @click="destroy(marker.id)">DELETE</DangerButton>
         </GMapInfoWindow>
           </GMapMarker>

@@ -9,8 +9,7 @@ const props = defineProps({
         default: () => ({}),
     },
 })
-console.log(Ziggy.routes)
-console.log(props.quizzes)
+
 </script>
 <template>
     <Head title="Choose quiz"/>
