@@ -87,7 +87,7 @@ const clearPhotoFileInput = () => {
 
         <template #form>
             <!-- Profile Photo -->
-            <div v-if="'storage/' + user.profile_photo_path" class="col-span-6 sm:col-span-4">
+            <div v-if="'storage/' + $page.props.auth.user.profile_photo_path" class="col-span-6 sm:col-span-4">
                 <!-- Profile Photo File Input -->
                 <input
                     ref="photoInput"
@@ -100,7 +100,7 @@ const clearPhotoFileInput = () => {
 
                 <!-- Current Profile Photo -->
                 <div v-show="! photoPreview" class="mt-2">
-                    <img :src="'storage/' + user.profile_photo_path" :alt="user.name" class="rounded-full h-20 w-20 object-cover">
+                    <img :src="'storage/' + $page.props.auth.user.profile_photo_path" class="rounded-full h-20 w-20 object-cover">
                 </div>
 
                 <!-- New Profile Photo Preview -->
@@ -116,7 +116,7 @@ const clearPhotoFileInput = () => {
                 </SecondaryButton>
 
                 <SecondaryButton
-                    v-if="'storage/' + user.profile_photo_path"
+                    v-if="'storage/' + $page.props.auth.user.profile_photo_path"
                     type="button"
                     class="mt-2"
                     @click.prevent="deletePhoto"
