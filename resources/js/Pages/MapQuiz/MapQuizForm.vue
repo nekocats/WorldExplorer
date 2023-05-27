@@ -75,7 +75,7 @@ function destroy(id) {
            </div>
         Longitude:
         <div class="p-2">
-            <input v-model="form.long" placeholder="Longitude" class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm">
+            <input v-model="form.lng" placeholder="Longitude" class="block text-white w-full border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm">
 
         </div>
 
