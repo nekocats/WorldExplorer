@@ -2,6 +2,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import DangerButton from '@/Components/DangerButton.vue';
 import { useForm, usePage, Head, Link } from '@inertiajs/vue3';
 const props = defineProps({
 
@@ -18,6 +19,13 @@ const form = useForm({
     description: '',
     user_id: usePage().props.auth.user.id,
 });
+
+const formDel = useForm({});
+function destroy(id) {
+    if (confirm("Are you sure you want to Delete")) {
+        formDel.delete(route('destroyMapQuiz', id));
+    }
+}
 </script>
 
 <template>
@@ -42,6 +50,7 @@ const form = useForm({
         </div>
         <div class="flex flex-col items-center" :key="quiz.id" v-for="quiz in quizzes">
             <Link class="text-lime-100 text-3xl p-2" :href="route('quizmap.getQuiz', quiz.id)" >{{ quiz.title }}</Link>
+            <DangerButton @click="destroy(quiz.id)">DELETE</DangerButton>
         </div>
 
     </AppLayout>

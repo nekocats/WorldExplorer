@@ -18,8 +18,7 @@ return new class extends Migration
             $table->float('lat', 10, 7);
             $table->float('lng', 10, 7);
             $table->foreignId('map_quiz_id')
-            ->constrained()
-            ->onUpdate('cascade')
+            ->constrained('map_quizzes')
             ->onDelete('cascade');
         });
     }

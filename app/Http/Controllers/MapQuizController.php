@@ -238,8 +238,9 @@ class MapQuizController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MapQuiz $mapQuiz)
+    public function destroy(MapQuiz $mapQuiz, $id)
     {
-        //
+        MapQuiz::where('id', $id)->delete();
+        return redirect()->back();
     }
 }

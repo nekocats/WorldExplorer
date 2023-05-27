@@ -45,6 +45,7 @@ Route::get('/mapquizzes', function () {
         'quizzes' => MapQuiz::where('user_id', Auth::id())->get()
     ]);
 })->name('mapquizzes');
+Route::delete('destroy/{id}', [MapQuizController::class,'destroy'])->name('destroyMapQuiz');
 
 Route::get('/choosemapquiz', [MapQuizController::class, 'index'])->name('choosequiz');
 

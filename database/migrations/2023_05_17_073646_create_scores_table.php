@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->float('score', 99, 7);
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('map_quiz_id')->constrained();
+            $table->foreignId('map_quiz_id')
+            ->constrained('map_quizzes')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }
