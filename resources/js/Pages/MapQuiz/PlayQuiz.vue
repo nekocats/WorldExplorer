@@ -124,8 +124,9 @@ function nextQ() {
                    </svg>
                </Link> <br>
               </div>
-            <button v-if="answered == 1" @click="nextQ" class="w-32 h-16  text-2xl text-white absolute flex bottom-5 justify-center inset-x-[54rem]  backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl pt-4">NEXT</button>
-            <form @submit.prevent="submit"><button type="submit" v-if="answered == 0" :disabled="form.processing" class="w-32 h-16  text-2xl text-white absolute flex bottom-5 justify-center inset-x-[54rem] pt-4 backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl">ANSWER</button></form>
+            <button v-if="currentQ.current == questions.length - 1 && answered == 1" @click="router.get('/quizmap/show/' + questions[0].map_quiz_id)" class="w-32 h-24  text-2xl text-white absolute flex bottom-5 justify-center inset-x-[54rem]  backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl pt-4">PLAY AGAIN</button>
+            <button v-if="answered == 1 && currentQ.current != questions.length - 1" @click="nextQ" class="w-32 h-16  text-2xl text-white absolute flex bottom-5 justify-center inset-x-[54rem]  backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl pt-4">NEXT</button>
+            <form @submit.prevent="submit"><button type="submit" v-if="answered == 0 && currentQ.current != questions.length" :disabled="form.processing" class="w-32 h-16  text-2xl text-white absolute flex bottom-5 justify-center inset-x-[54rem] pt-4 backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl">ANSWER</button></form>
           </GMapMarker>
           <div v-if="currentQ.current == questions.length - 1 && answered == 1" class="absolute inset-1/4 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-1 items-center align-center rounded-3xl">
               <h1 class="font-raleway box-border text-4xl text-white rounded-lg font-bold pl-24">Game over!</h1>
