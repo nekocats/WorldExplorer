@@ -1,6 +1,7 @@
 <script setup>
-import AppLayout from '@/Layouts/AppLayout.vue';
-import { ref, onMounted } from "vue";
+
+import AppLayout from '@/Layouts/RankingLayout.vue';import { ref, onMounted } from "vue";
+import {Link} from "@inertiajs/vue3";
 
 
 const props = defineProps({
@@ -29,10 +30,9 @@ console.log(props.users)
 
 <template #header>
   <AppLayout title="Ranking">
-    <div class="relative bg-materialgreenlight dark:bg-materialgreenbg bg-cover grid pl-20 pr-20 min-h-screen bg-center selection:bg-lime-950 selection:text-white">
-      <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-        Leaderboard
-      </h2>
+    <div class="flex bg-materialgreenlight dark:bg-materialgreenbg bg-cover grid pl-20 pr-20 min-h-screen bg-center selection:bg-lime-950 selection:text-white">
+
+
       <div class="flex flex-col h-full w-full block">
         <div>
           <div class="inline-block w-full overflow-hidden shadow sm:rounded-lg">
