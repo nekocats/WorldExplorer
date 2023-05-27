@@ -1,7 +1,6 @@
 <script setup>
 import {Head, Link, useForm, router} from '@inertiajs/vue3'
-import { computed, reactive, ref, watch } from 'vue';
-import haversine from 'haversine-distance'
+import {  reactive, ref, watch } from 'vue';
 import answerIcon from "./Icons/icons8-map-pin-48.png"
 import guessIcon from "./Icons/guess.png"
 
@@ -60,8 +59,6 @@ watch(
   }
 )
 
-
-
 const currentQ = ref({current: 0})
 
 
@@ -93,28 +90,14 @@ const answered = ref(0)
   router.post('/quizmap/show/' + props.questions[0].map_quiz_id, form, {
     preserveState: true,
   })
-
 }
 function nextQ() {
     currentQ.value.current++
     answered.value = 0
 }
-
-
-
-
-
 </script>
-
-
-
 <template class="whitespace-nowrap overflow-hidden w-24 scrollbar-none">
     <Head title="Map Quiz"/>
-
-
-
-
-
     <GuestLayout class="scrollbar-none">
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" class="h-screen w-screen"  @click="gMark">
         <GMapMarker :icon="answerIcon"   :position="{lat:location.lat, lng:location.lng}" v-if="answered == 1">
@@ -123,12 +106,16 @@ function nextQ() {
       :path="[{lat:form.lat, lng:form.lng}, {lat:location.lat, lng:location.lng}]"
         ref="polyline" />
        <GMapMarker :icon="guessIcon" :position="{lat:form.lat, lng:form.lng}">
+           <div class="absolute right-0 scale-20 origin-top-right inset-y-0 inset-x-0">
+               <img class="rounded-b-3xl" :src="questions[currentQ.current].image" alt="">
+           </div>
         <div class="absolute top-0 inset-x-96 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-5 items-center align-center rounded-b-3xl">
+
+
     <h1 class="font-raleway box-border text-4xl text-white">{{ questions[currentQ.current].question }}</h1>
-
     <h1 class="font-raleway box-border text-4xl text-lime-200 rounded-lg font-bold pl-24">Score: {{ Math.round(score) }}</h1>
-  </div>
 
+  </div>
 
            <div class=" absolute top-4 left-72 flex backdrop-blur-sm bg-white/30 rounded-3xl ">
                <Link data-te-toggle="tooltip" title="Back to quiz chooser" :href="route('choosequiz')" class="scrollbar-none flex text-2xl p-4  py-4 font-raleway text-white rounded-lg">
@@ -137,13 +124,8 @@ function nextQ() {
                    </svg>
                </Link> <br>
               </div>
-
-        <div class=" absolute flex bottom-5 justify-center inset-x-[50rem]  backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl">
-            <button v-if="answered == 1" @click="nextQ" class="w-32 h-16 text-2xl text-white">NEXT</button>
-            <form @submit.prevent="submit"><button type="submit" v-if="answered == 0" :disabled="form.processing" class="w-32 h-16  text-2xl text-white">ANSWER</button></form>
-        </div>
-
-
+            <button v-if="answered == 1" @click="nextQ" class="w-32 h-16  text-2xl text-white absolute flex bottom-5 justify-center inset-x-[54rem]  backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl pt-4">NEXT</button>
+            <form @submit.prevent="submit"><button type="submit" v-if="answered == 0" :disabled="form.processing" class="w-32 h-16  text-2xl text-white absolute flex bottom-5 justify-center inset-x-[54rem] pt-4 backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl">ANSWER</button></form>
           </GMapMarker>
           <div v-if="currentQ.current == questions.length - 1 && answered == 1" class="absolute inset-1/4 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-1 items-center align-center rounded-3xl">
               <h1 class="font-raleway box-border text-4xl text-white rounded-lg font-bold pl-24">Game over!</h1>
@@ -154,8 +136,6 @@ function nextQ() {
                   </svg>
               </Link> <br>
            </div>
-
     </GMapMap>
 </GuestLayout>
-
   </template>

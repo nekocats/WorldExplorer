@@ -32,6 +32,12 @@ module.exports = {
                 materialgreenlight: '#f8ffe6',
             },
 
+            scale: {
+                '25': '0.25',
+                '10': '0.10',
+                '20': '0.20',
+            },
+
             textShadow: {
                 sm: '0 1px 2px var(--tw-shadow-color)',
                 DEFAULT: '0px 4px 4px var(--tw-shadow-color)',
