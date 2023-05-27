@@ -62,6 +62,9 @@ const logout = () => {
                                 <NavLink :href="route('mapquizzes')" :active="route().current('mapquizzes')">
                                     Add Map Quiz Data
                                 </NavLink>
+                                <NavLink v-if="$page.props.user.permissions.includes('manage maps')" :href="route('adminmapquizzes')" :active="route().current('adminmapquizzes')">
+                                    Admin Map Management
+                                </NavLink>
 
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     About

@@ -9,6 +9,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,14 @@ Route::get('/mapquizzes', function () {
         'quizzes' => MapQuiz::where('user_id', Auth::id())->get()
     ]);
 })->name('mapquizzes');
+
+Route::group(['middleware' => ['can:manage maps']], function () {
+    Route::get('/admin/mapquizzes', function () {
+        return Inertia::render('MapQuiz/AdminQuizzes', [
+            'quizzes' => MapQuiz::all()
+        ]);
+    })->name('adminmapquizzes');
+});
 Route::delete('destroy/{id}', [MapQuizController::class,'destroy'])->name('destroyMapQuiz');
 
 Route::get('/choosemapquiz', [MapQuizController::class, 'index'])->name('choosequiz');
@@ -60,7 +70,7 @@ Route::name('quizmap.')->prefix('quizmap')->group(function () {
         ]);
     })->name('ranking');
     Route::get('/{id}', function (string $id) {
-        if (MapQuiz::where('id', $id)->first()->user_id == Auth::id()) {
+        if (MapQuiz::where('id', $id)->first()->user_id == Auth::id()  || Auth::user()->can('manage maps')) {
             return Inertia::render('MapQuiz/MapQuizForm', [
                 'quiz' => $id,
                 'markers' => MapQuiz::where('id', $id)->with('questions')->get()
