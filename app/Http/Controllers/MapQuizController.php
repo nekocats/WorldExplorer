@@ -59,16 +59,16 @@ class MapQuizController extends Controller
     public function show(MapQuiz $mapQuiz, $id)
     {
 
-        if (session()->has("key$id") != true) {
+        if (session()->has("questions/$id") != true) {
             $questions = [];
             foreach (MapQuestion::select('id', 'question', 'map_quiz_id')->where('map_quiz_id', $id)->get() as $value) {
                 array_push($questions, $value);
                 shuffle($questions);
             }
-            session(["key$id" => $questions]);
+            session(["questions/$id" => $questions]);
         }
 
-            $sessionQ = session("key$id");
+            $sessionQ = session("questions/$id");
 
 
         function haversineGreatCircleDistance(
@@ -105,6 +105,8 @@ class MapQuizController extends Controller
 
                 }
                 if ($gamestate == true) {
+                    session()->forget("questions/$id");
+                    $sessionQ = [];
                     if (Auth::check()) {
                         if (Score::where('user_id', Auth::id())->where('map_quiz_id', $id)->exists() && Score::where('user_id', Auth::id())->where('map_quiz_id', $id)->first()->score < session("score$id")) {
                             Score::where('map_quiz_id', $id)
@@ -142,35 +144,35 @@ class MapQuizController extends Controller
             switch ($distance) {
                 case $distance <= 20000:
                     session(["score$id" =>  $sessionScore = $sessionScore + 5000]);
-                    submitScore(count(session("key$id")) - 1, $this->gameover, $id);
+                    submitScore(count(session("questions/$id")) - 1, $this->gameover, $id);
                   break;
                 case $distance > 20000 && $distance < 40000:
                     session(["score$id" =>  $sessionScore = $sessionScore + (5000 - ($distance / 100))]);
-                    submitScore(count(session("key$id")) - 1, $this->gameover, $id);
+                    submitScore(count(session("questions/$id")) - 1, $this->gameover, $id);
                   break;
                 case $distance > 40000 && $distance < 60000:
                     session(["score$id" =>  $sessionScore = $sessionScore + (4600 - ($distance / 100))]);
-                    submitScore(count(session("key$id")) - 1, $this->gameover, $id);
+                    submitScore(count(session("questions/$id")) - 1, $this->gameover, $id);
                   break;
                 case $distance > 60000 && $distance < 100000:
                     session(["score$id" =>  $sessionScore = $sessionScore + (4000 - ($distance / 100))]);
-                    submitScore(count(session("key$id")) - 1, $this->gameover, $id);
+                    submitScore(count(session("questions/$id")) - 1, $this->gameover, $id);
                   break;
                 case $distance > 100000 && $distance < 200000:
                     session(["score$id" =>  $sessionScore = $sessionScore + (3000 - ($distance / 100))]);
-                    submitScore(count(session("key$id")) - 1, $this->gameover, $id);
+                    submitScore(count(session("questions/$id")) - 1, $this->gameover, $id);
                   break;
                 case $distance > 200000 && $distance < 400000:
                     session(["score$id" =>  $sessionScore = $sessionScore + (1000 - ($distance / 1000))]);
-                    submitScore(count(session("key$id")) - 1, $this->gameover, $id);
+                    submitScore(count(session("questions/$id")) - 1, $this->gameover, $id);
                   break;
                 case $distance > 400000 && $distance < 600000:
                     session(["score$id" =>  $sessionScore = $sessionScore + (600 - ($distance / 1200))]);
-                    submitScore(count(session("key$id")) - 1, $this->gameover, $id);
+                    submitScore(count(session("questions/$id")) - 1, $this->gameover, $id);
                   break;
                 case $distance > 600000 && $distance < 1000000:
                     session(["score$id" =>  $sessionScore = $sessionScore + (100 - ($distance / 10000))]);
-                    submitScore(count(session("key$id")) - 1, $this->gameover, $id);
+                    submitScore(count(session("questions/$id")) - 1, $this->gameover, $id);
                   break;
 
 
