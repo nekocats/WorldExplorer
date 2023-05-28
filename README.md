@@ -1,4 +1,5 @@
-![WorldExplorer](https://github.com/nekocats/HistoryGuesser/assets/71066639/0e671d15-0dbf-488b-87eb-7d4715279160)
+![WorldExplorer](https://github.com/nekocats/WorldExplorer/assets/71066639/812306bf-75dc-4030-b6b1-532a5507585a)
+
 # WorldExplorer
 ## Welcome to WorldExplorer, the addictive map guessing game! 
 ## WorldExplorer is a game where you learn and try to guess famous historical landmarks.
