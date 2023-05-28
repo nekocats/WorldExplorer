@@ -39,7 +39,7 @@ watch(search, (value) => {
             />
         </div>
 
-          <div class="grid gap-4">
+          <div class="grid grid-cols-2 gap-4">
             <div class="flex w-full" :key="quiz.id" v-for="quiz in quizzes.data">
               <Link class="w-full text-center rounded-md bg-lime-600 px-20 py-2.5 text-xl font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" :href="route('quizmap.show', quiz.id)" >{{ quiz.title }}</Link>
               <Link class="pl-3 pt-1 hover:border-lime-700 rounded-lg text-shadow shadow-black  text-5xl text-lime-700 hover:animate-pulse transition-all hover:transition-all duration-1000 hover:duration-1000" data-te-toggle="tooltip" title="Leaderboard" :href="route('quizmap.ranking', quiz.id )">
