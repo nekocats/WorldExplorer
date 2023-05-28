@@ -7,6 +7,7 @@ use App\Models\Score;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Permission\Models\Role;
@@ -51,7 +52,11 @@ Route::get('/mapquizzes', function () {
 Route::group(['middleware' => ['can:manage maps']], function () {
     Route::get('/admin/mapquizzes', function () {
         return Inertia::render('MapQuiz/AdminQuizzes', [
-            'quizzes' => MapQuiz::all()
+            'quizzes' => MapQuiz::query()
+            ->when(Request::input('search'), function ($query, $search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->OrWhere('description', 'like', '%' . $search . '%');
+            })->paginate(8)
         ]);
     })->name('adminmapquizzes');
 });
