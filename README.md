@@ -17,7 +17,8 @@ Choose quiz mode             |  Map data adding with map
 
 Map data adding              |  About page
 :-------------------------:|:-------------------------:
-![](https://github.com/nekocats/WorldExplorer/assets/71066639/0fb1eceb-6cee-4464-9440-fef23afc4e65)  |  ![](https://user-images.githubusercontent.com/71066639/233734825-f3c6791a-5d30-4129-aa8f-9a999db7252d.png)
+![](https://github.com/nekocats/WorldExplorer/assets/71066639/0fb1eceb-6cee-4464-9440-fef23afc4e65)  |  ![](https://github.com/nekocats/WorldExplorer/assets/71066639/ffb25f6b-8532-42fe-8734-b3e0ffc890a9)
+
 
 
 
