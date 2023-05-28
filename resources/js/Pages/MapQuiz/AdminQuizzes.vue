@@ -3,7 +3,9 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
-import { useForm, usePage, Head, Link } from '@inertiajs/vue3';
+import Pagination  from '@/Components/Pagination.vue';
+import { useForm, usePage, Head, Link, router } from '@inertiajs/vue3';
+import { ref, watch } from "vue";
 const props = defineProps({
 
     quizzes: {
@@ -13,7 +15,16 @@ const props = defineProps({
 })
 
 console.log(props.quizzes)
-
+let search = ref('');
+watch(search, (value) => {
+  router.get(
+    "/admin/mapquizzes",
+    { search: value },
+    {
+      preserveState: true,
+    }
+  );
+});
 const form = useForm({
     title: '',
     description: '',
@@ -46,12 +57,19 @@ function destroy(id) {
                 <InputError :message="form.errors.title" class="mt-2" />
                 <PrimaryButton class="mt-4 p-6 ">Add</PrimaryButton>
             </form>
+            <input
+                                    type="text"
+                                    v-model="search"
+                                    placeholder="Search..."
+                                    class="bg-gray-50 border  mt-6 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60 p-2.5 "
+                                />
+
 
         </div>
-        <div class="flex flex-col items-center" :key="quiz.id" v-for="quiz in quizzes">
+        <div class="flex justify-center items-center" :key="quiz.id" v-for="quiz in quizzes.data">
             <Link class="text-lime-100 text-3xl p-2" :href="route('quizmap.getQuiz', quiz.id)" >{{ quiz.title }}</Link>
             <DangerButton @click="destroy(quiz.id)">DELETE</DangerButton>
         </div>
-
+        <Pagination :data="quizzes" />
     </AppLayout>
 </template>
