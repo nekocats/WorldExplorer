@@ -71,7 +71,7 @@ Route::name('quizmap.')->prefix('quizmap')->group(function () {
     Route::get('ranking/{id}', function (string $id) {
         return Inertia::render('Ranking', [
             'users' => User::all(),
-            'scores' => Score::where('map_quiz_id', $id)->with('user')->orderBy('score', 'desc')->get()
+            'scores' => Score::where('map_quiz_id', $id)->with('user')->orderBy('score', 'desc')->paginate(6)
         ]);
     })->name('ranking');
     Route::get('/{id}', function (string $id) {
