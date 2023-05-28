@@ -75,7 +75,7 @@ Route::name('quizmap.')->prefix('quizmap')->group(function () {
         ]);
     })->name('ranking');
     Route::get('/{id}', function (string $id) {
-        if (MapQuiz::where('id', $id)->first()->user_id == Auth::id()  || Auth::user()->can('manage maps')) {
+        if (MapQuiz::where('id', $id)->first()->user_id == Auth::id()  || !Auth::guest() && Auth::user()->can('manage maps')) {
             return Inertia::render('MapQuiz/MapQuizForm', [
                 'quiz' => $id,
                 'markers' => MapQuiz::where('id', $id)->with('questions')->get()
