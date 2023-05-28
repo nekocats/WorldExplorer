@@ -20,7 +20,11 @@ class MapQuizController extends Controller
     public function index()
     {
         return Inertia::render('MapQuiz/ChooseQuiz', [
-            'quizzes' => MapQuiz::all()
+            'quizzes' => MapQuiz::query()
+            ->when(Request::input('search'), function ($query, $search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->OrWhere('description', 'like', '%' . $search . '%');
+            })->paginate(8)
         ]);
     }
 
