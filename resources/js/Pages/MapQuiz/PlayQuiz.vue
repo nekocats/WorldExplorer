@@ -106,8 +106,8 @@ function nextQ() {
       :path="[{lat:form.lat, lng:form.lng}, {lat:location.lat, lng:location.lng}]"
         ref="polyline" />
        <GMapMarker :icon="guessIcon" :position="{lat:form.lat, lng:form.lng}">
-           <div class="absolute right-0 scale-20 origin-top-right inset-y-0 inset-x-0">
-               <img class="rounded-b-3xl object-cover " :src="questions[currentQ.current].image" alt="">
+           <div class="absolute right-24 top-0">
+               <img class="rounded-b-3xl w-auto h-40 " :src="questions[currentQ.current].image" alt="">
            </div>
         <div class="absolute top-0 inset-x-96 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-5 items-center align-center rounded-b-3xl">
 
