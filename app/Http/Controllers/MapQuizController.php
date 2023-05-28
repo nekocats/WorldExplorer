@@ -93,7 +93,7 @@ class MapQuizController extends Controller
             $distance = 0;
             $score = 0;
             $firstQ = 0;
-            $location = array('lat' => 999, 'lng' => 999);
+            $location = array('lat' => null, 'lng' => null);
             session(["score$id" => $score]);
             session(["currentQ$id" => $firstQ]);
 
