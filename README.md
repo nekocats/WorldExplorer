@@ -5,14 +5,19 @@
 
 Main Menu               |  Game select
 :-------------------------:|:-------------------------:
-![](https://github.com/nekocats/HistoryGuesser/assets/71066639/262837c7-9b5c-4dad-a26c-94e33b4f6c20)  |  ![](https://github.com/nekocats/HistoryGuesser/assets/71066639/5dc44c7e-5d25-4197-ab3d-89b7d0f46e9d)
+![](https://github.com/nekocats/HistoryGuesser/assets/71066639/262837c7-9b5c-4dad-a26c-94e33b4f6c20)  |  ![](https://github.com/nekocats/WorldExplorer/assets/71066639/8b12b08a-e07b-4bd4-afaf-550fbf7753af)
 
-
-Choose quiz mode             |  Game
+Leaderboard              |  Game
 :-------------------------:|:-------------------------:
-![](https://github.com/nekocats/HistoryGuesser/assets/71066639/96e16955-fda7-4c18-a1eb-5de21483916a)  |  ![](https://github.com/nekocats/HistoryGuesser/assets/71066639/ab9cd484-5b52-4ff8-ba50-273be6809b6f)
+![](https://github.com/nekocats/WorldExplorer/assets/71066639/b08bb88f-4e37-4e2c-b77e-3f96586d304e)  |  ![](https://github.com/nekocats/WorldExplorer/assets/71066639/73ceb416-bbf1-4a6d-8e9f-fcfc42796690)
 
+Choose quiz mode             |  Map data adding with map
+:-------------------------:|:-------------------------:
+![](https://github.com/nekocats/HistoryGuesser/assets/71066639/96e16955-fda7-4c18-a1eb-5de21483916a)  |  ![](https://github.com/nekocats/WorldExplorer/assets/71066639/bcae4dce-dec0-4a9f-a5bd-23446b7b231a)
 
 Map data adding              |  About page
 :-------------------------:|:-------------------------:
-![](https://github.com/nekocats/HistoryGuesser/assets/71066639/acd0d0ec-fd01-4da8-a121-1a4cad4386e0)  |  ![](https://user-images.githubusercontent.com/71066639/233734825-f3c6791a-5d30-4129-aa8f-9a999db7252d.png)
+![](https://github.com/nekocats/WorldExplorer/assets/71066639/0fb1eceb-6cee-4464-9440-fef23afc4e65)  |  ![](https://user-images.githubusercontent.com/71066639/233734825-f3c6791a-5d30-4129-aa8f-9a999db7252d.png)
+
+
+
