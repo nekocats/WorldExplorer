@@ -28,14 +28,17 @@ watch(search, (value) => {
     <div class="relative bg-frontPageBg bg-cover grid justify-items-center items-center min-h-screen bg-dots-darker bg-center bg-materialgreenlight dark:bg-materialgreenbg selection:bg-lime-950 selection:text-white">
     <div class="flex flex-col items-center justify-center ">
         <ApplicationLogo class="h-40 w-auto justify-self-center" />
-        <h1 class="text-4xl font-bold tracking-tight text-lime-600 sm:text-6xl">Select Gamemode</h1>
+        <h1 class="text-4xl font-bold tracking-tight text-lime-600 sm:text-5xl">Select Gamemode</h1>
     </div>
-    <input
-                                    type="text"
-                                    v-model="search"
-                                    placeholder="Search..."
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60 p-2.5 "
-                                />
+        <div class="p-4">
+            <input
+                    type="text"
+                    v-model="search"
+                    placeholder="Search for a quiz..."
+                    class="block text-white w-96 h-10 border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"
+            />
+        </div>
+
           <div class="grid gap-4">
             <div class="flex w-full" :key="quiz.id" v-for="quiz in quizzes.data">
               <Link class="w-full text-center rounded-md bg-lime-600 px-20 py-2.5 text-xl font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" :href="route('quizmap.show', quiz.id)" >{{ quiz.title }}</Link>
@@ -46,7 +49,7 @@ watch(search, (value) => {
               </Link>
             </div>
           </div>
-          <Pagination :data="quizzes" />
+          <Pagination class="bg-materialgreenbg" :data="quizzes" />
 
         <div class="p-5 justify-center self-center grid">
 

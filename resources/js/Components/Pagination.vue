@@ -15,8 +15,8 @@ defineProps({
         <Link
             v-for="(link, k) in data.links"
             :key="k"
-            class="px-4 py-3 text-sm leading-4 bg-white rounded hover:bg-white focus:text-indigo-500 hover:shadow"
-            :class="{'bg-indigo-400 text-white': link.active}"
+            class="px-4 py-3 text-lg leading-4 bg-materialgreenbg text-white hover:text-materialgreenbg font-semibold  rounded hover:bg-lime-500 focus:text-indigo-500 hover:shadow"
+            :class="{'bg-white text-materialgreenbg': link.active}"
             :href="link.url"
             v-html="link.label"
         />

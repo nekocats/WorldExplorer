@@ -131,7 +131,7 @@ function nextQ() {
           <div v-if="currentQ.current == questions.length - 1 && answered == 1" class="absolute inset-1/4 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-1 items-center align-center rounded-3xl">
               <h1 class="font-raleway box-border text-4xl text-white rounded-lg font-bold pl-24">Game over!</h1>
               <h1 class="font-raleway box-border text-4xl text-lime-200 rounded-lg font-bold pl-24">Your score is: {{ Math.round(score) }}</h1>
-              <Link data-te-toggle="tooltip" title="Back to quiz chooser" :href="route('choosequiz')" class="scrollbar-none flex text-2xl p-4  py-4 font-raleway text-white rounded-lg">
+              <Link data-te-toggle="tooltip" title="Back to quiz chooser" :href="route('choosequiz')" class="scrollbar-none flex text-2xl p-4  py-4 font-raleway text-white roun  ded-lg">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                   </svg>

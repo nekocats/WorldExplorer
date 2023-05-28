@@ -45,7 +45,7 @@ function destroy(id) {
 
         </div>
         <div class="flex flex-col items-center" :key="quiz.id" v-for="quiz in quizzes">
-            <Link class="text-lime-100 text-3xl p-2" :href="route('quizmap.getQuiz', quiz.id)" >{{ quiz.title }}</Link>
+            <Link class="text-lime-200 text-3xl p-2" :href="route('quizmap.getQuiz', quiz.id)" >{{ quiz.title }}</Link>
             <DangerButton @click="destroy(quiz.id)">DELETE</DangerButton>
         </div>
 
