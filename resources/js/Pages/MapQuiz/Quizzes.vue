@@ -34,7 +34,7 @@ function destroy(id) {
         <div class="max-w-2xl mx-auto p-8 sm:p-6 lg:p-8">
             <form @submit.prevent="form.post(route('mapquiz.store'), { onSuccess: () => form.reset() })">
                 <h2 class="text-lime-700 dark:text-lime-500 text-3xl font-bold">
-                    Add map data
+                    Add a quiz
                 </h2>
                 <div class="py-6 text-white">
                     <input placeholder="Title" type="text" v-model="form.title" class="block w-full border-lime-500 bg-materialgreenlight dark:bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm">
