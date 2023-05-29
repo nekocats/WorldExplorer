@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,21 @@ use Spatie\Permission\Models\Permission;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/email/verify', function () {
+    return Inertia::render('Auth/VerifyEmail');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    Request::user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -58,7 +74,7 @@ Route::group(['middleware' => ['can:manage maps']], function () {
                     ->OrWhere('description', 'like', '%' . $search . '%');
             })->paginate(8)
         ]);
-    })->name('adminmapquizzes');
+    })->middleware(['auth', 'verified'])->name('adminmapquizzes');
 });
 Route::delete('destroy/{id}', [MapQuizController::class,'destroy'])->name('destroyMapQuiz');
 
@@ -93,7 +109,6 @@ Route::name('quizmap.')->prefix('quizmap')->group(function () {
 
 
     Route::delete('destroy/{id}', [MapQuestionController::class,'destroy'])->name('destroy');
-    Route::post('submitanswer', [MapQuizController::class, 'submitanswer'])->name('submitanswer');
 });
 
 Route::get('/quiz', function () {
