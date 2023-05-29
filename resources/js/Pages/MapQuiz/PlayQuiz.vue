@@ -100,12 +100,12 @@ function nextQ() {
     <Head title="Map Quiz"/>
     <GuestLayout class="scrollbar-none">
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" class="h-screen w-screen"  @click="gMark">
-        <GMapMarker :icon="answerIcon"   :position="{lat:location.lat, lng:location.lng}" v-if="answered == 1">
+        <GMapMarker :icon="answerIcon" :animation="1"   :position="{lat:location.lat, lng:location.lng}" v-if="answered == 1">
           </GMapMarker>
           <GMapPolyline v-if="answered == 1"
       :path="[{lat:form.lat, lng:form.lng}, {lat:location.lat, lng:location.lng}]"
         ref="polyline" />
-       <GMapMarker :icon="guessIcon" :position="{lat:form.lat, lng:form.lng}">
+       <GMapMarker :icon="guessIcon"  :position="{lat:form.lat, lng:form.lng}">
            <div class="absolute right-24 top-0">
                <img class="rounded-b-3xl w-auto h-40 " :src="questions[currentQ.current].image" alt="">
            </div>
@@ -113,6 +113,7 @@ function nextQ() {
 
 
     <h1 class="font-raleway box-border text-4xl text-white">{{ questions[currentQ.current].question }}</h1>
+    <h1 class="font-raleway box-border text-4xl text-white">{{ currentQ.current + 1 }} / {{ questions.length }}</h1>
     <h1 class="font-raleway box-border text-4xl text-lime-200 rounded-lg font-bold pl-24">Score: {{ Math.round(score) }}</h1>
 
   </div>

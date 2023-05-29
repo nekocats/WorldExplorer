@@ -178,6 +178,10 @@ class MapQuizController extends Controller
                     session(["score$id" =>  $sessionScore = $sessionScore + (100 - ($distance / 10000))]);
                     submitScore(count(session("questions/$id")) - 1, $this->gameover, $id);
                   break;
+                case $distance > 1000000 && $distance < 2000000:
+                    session(["score$id" =>  $sessionScore = $sessionScore + (50 - ($distance / 40000))]);
+                    submitScore(count(session("questions/$id")) - 1, $this->gameover, $id);
+                  break;
 
 
               }
