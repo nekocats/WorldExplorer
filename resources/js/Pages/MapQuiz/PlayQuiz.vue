@@ -78,8 +78,11 @@ const form = useForm({
 
 })
 function gMark(event) {
-    form.lat = event.latLng.lat()
-    form.lng = event.latLng.lng()
+    if (answered.value == 0) {
+        form.lat = event.latLng.lat()
+        form.lng = event.latLng.lng()
+    }
+
 
   }
 
