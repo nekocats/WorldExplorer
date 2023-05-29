@@ -63,7 +63,7 @@ Route::get('/mapquizzes', function () {
     return Inertia::render('MapQuiz/Quizzes', [
         'quizzes' => MapQuiz::where('user_id', Auth::id())->get()
     ]);
-})->name('mapquizzes');
+})->middleware(['auth', 'verified'])->name('mapquizzes');
 
 Route::group(['middleware' => ['can:manage maps']], function () {
     Route::get('/admin/mapquizzes', function () {
