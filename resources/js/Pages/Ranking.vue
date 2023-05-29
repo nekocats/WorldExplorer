@@ -84,7 +84,7 @@ watch(search, (value) => {
               </tr>
               </tbody>
             </table>
-            <Pagination class="bg-materialgreenbg" :data="scores" />
+            <Pagination class="bg-materialgreenlight dark:bg-materialgreenbg" :data="scores" />
           </div>
         </div>
       </div>

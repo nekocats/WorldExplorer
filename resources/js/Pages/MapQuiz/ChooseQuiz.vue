@@ -35,7 +35,7 @@ watch(search, (value) => {
                     type="text"
                     v-model="search"
                     placeholder="Search for a quiz..."
-                    class="block text-white w-96 h-10 border-lime-500 bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                    class="block font-bold text-lime-700 w-96 h-10 border-lime-500 bg-materialgreenlight dark:bg-materialgreenbg focus:border-lime-500 focus:ring focus:ring-lime-200 focus:ring-opacity-50 rounded-md shadow-sm"
             />
         </div>
 
