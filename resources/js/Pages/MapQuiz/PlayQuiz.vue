@@ -5,6 +5,9 @@ import answerIcon from "./Icons/icons8-map-pin-48.png"
 import guessIcon from "./Icons/guess.png"
 import ConfettiExplosion from "vue-confetti-explosion";
 
+import "leaflet/dist/leaflet.css"
+import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet"
+
 const props = defineProps({
     quiz: {
         type: Object,
@@ -70,7 +73,7 @@ guess.value.lat = event.latLng.lat()
 guess.value.lng = event.latLng.lng()
 
   }
- const center = reactive({ lat: 58.2449205980223, lng: 22.496933575606914 })
+
 const currentId = ref(0)
 const form = useForm({
   lat: null,
@@ -110,13 +113,16 @@ function nextQ() {
 }
 
 const componentKey = ref(0);
+let zoom = ref(6)
+let center = ref([38, 139.69])
 </script>
 <template class="whitespace-nowrap overflow-hidden w-24 scrollbar-none">
     <Head title="Map Quiz"/>
     <GuestLayout class="scrollbar-none">
-
-    <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" class="h-screen w-screen"  @click="gMark">
-
+    <l-map ref="map" v-model:zoom="zoom" v-model:center="center" :useGlobalLeaflet="false" class="h-screen w-screen"  @click="gMark">
+        <l-tile-layer url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+                    layer-type="base"
+                    name="Stadia Maps Basemap"></l-tile-layer>
         <GMapMarker :icon="answerIcon" :animation="1"   :position="{lat:location.lat, lng:location.lng}" v-if="answered == 1">
                       <GMapInfoWindow
           :opened="true"
@@ -136,7 +142,7 @@ const componentKey = ref(0);
           <GMapPolyline v-if="answered == 1"
       :path="[{lat:form.lat, lng:form.lng}, {lat:location.lat, lng:location.lng}]"
         ref="polyline" />
-       <GMapMarker :icon="guessIcon" :animation="2" :key="componentKey"  :position="{lat:form.lat, lng:form.lng}">
+       <GMapMarker :icon="guessIcon" :animation="2" :key="componentKey"  :position="{lat:form.lat, lng:form.lng}">          </GMapMarker>
            <div class="absolute right-24 top-0">
                <img class="rounded-b-3xl w-auto h-40 " :src="questions[currentQ.current].image" alt="">
            </div>
@@ -161,7 +167,7 @@ const componentKey = ref(0);
             <button v-if="currentQ.current == questions.length - 1 && answered == 1" @click="router.get('/quizmap/show/' + questions[0].map_quiz_id)" class="w-32 h-24  text-2xl text-white absolute flex bottom-5 justify-center inset-x-[54rem]  backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl pt-4">PLAY AGAIN</button>
             <button v-if="answered == 1 && currentQ.current != questions.length - 1" @click="nextQ" class="w-32 h-16  text-2xl text-white absolute flex bottom-5 justify-center inset-x-[54rem]  backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl pt-4">NEXT</button>
             <form @submit.prevent="submit"><button type="submit" v-if="answered == 0 && currentQ.current != questions.length" :disabled="form.processing" class="w-32 h-16  text-2xl text-white absolute flex bottom-5 justify-center inset-x-[54rem] pt-4 backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl">ANSWER</button></form>
-          </GMapMarker>
+
           <div v-if="currentQ.current == questions.length - 1 && answered == 1" class="absolute overflow-hidden inset-1/4 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-1 items-center align-center rounded-3xl">
             <div class="absolute top-0 inset-x-96">
                 <ConfettiExplosion :particleCount="500" :duration="3000" :stageHeight="500" :stageWiWidth="465" v-if="currentQ.current == questions.length - 1 && answered == 1" />
@@ -175,6 +181,6 @@ const componentKey = ref(0);
                   </svg>
               </Link> <br>
            </div>
-    </GMapMap>
+    </l-map>
 </GuestLayout>
   </template>
