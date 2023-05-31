@@ -44,7 +44,7 @@ watch(
 watch(
   () => props.distance,
   () => {
-
+    console.log(props.distance)
   }
 )
 watch(
@@ -88,6 +88,13 @@ function gMark(event) {
 
 
   }
+function getDistance(distance) {
+    if (distance > 1000) {
+        return Math.round(distance / 1000) + ' km'
+    } else if (distance < 1000) {
+        return Math.round(distance) + ' m'
+    }
+}
 
 const answered = ref(0)
   function submit() {
@@ -111,6 +118,20 @@ const componentKey = ref(0);
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" class="h-screen w-screen"  @click="gMark">
 
         <GMapMarker :icon="answerIcon" :animation="1"   :position="{lat:location.lat, lng:location.lng}" v-if="answered == 1">
+                      <GMapInfoWindow
+          :opened="true"
+          :options="{
+          pixelOffset: {
+            width: 0,
+            height: -20
+          }
+        }"
+      >
+        <div>
+            <span>{{ getDistance(distance) }}</span>
+
+        </div>
+      </GMapInfoWindow>
           </GMapMarker>
           <GMapPolyline v-if="answered == 1"
       :path="[{lat:form.lat, lng:form.lng}, {lat:location.lat, lng:location.lng}]"
