@@ -4,9 +4,10 @@ import {  reactive, ref, watch } from 'vue';
 import answerIcon from "./Icons/icons8-map-pin-48.png"
 import guessIcon from "./Icons/guess.png"
 import ConfettiExplosion from "vue-confetti-explosion";
-
+import L from 'leaflet'
 import "leaflet/dist/leaflet.css"
-import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet"
+import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet"
+
 
 const props = defineProps({
     quiz: {
@@ -65,8 +66,8 @@ watch(
 
 const currentQ = ref({current: 0})
 
-
-const guess = ref({lat: null, lng: null})
+const map = ref(null)
+const guess = ref({lat:null, lng:null})
 
 function mark(event) {
 guess.value.lat = event.latLng.lat()
@@ -85,8 +86,11 @@ const form = useForm({
 function gMark(event) {
     if (answered.value == 0) {
         componentKey.value += 1;
-        form.lat = event.latLng.lat()
-        form.lng = event.latLng.lng()
+        console.log(event)
+        console.log(event.view.L.CRS)
+        guess.value = event.view.L.CRS.Simple.pointToLatLng({x: event.x, y: event.y})
+        // form.lat = event.latLng.lat()
+        // form.lng = event.latLng.lng()
     }
 
 
@@ -114,16 +118,24 @@ function nextQ() {
 
 const componentKey = ref(0);
 let zoom = ref(6)
-let center = ref([38, 139.69])
+let center = ref([60, 30.69])
+
+
+
 </script>
 <template class="whitespace-nowrap overflow-hidden w-24 scrollbar-none">
     <Head title="Map Quiz"/>
     <GuestLayout class="scrollbar-none">
-    <l-map ref="map" v-model:zoom="zoom" v-model:center="center" :useGlobalLeaflet="false" class="h-screen w-screen"  @click="gMark">
-        <l-tile-layer url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+        <div class="absolute h-screen w-screen -z-10">
+    <l-map ref="map" v-model:zoom="zoom" v-model:center="center"  @click.capture="gMark">
+        <l-tile-layer url="https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
+
                     layer-type="base"
                     name="Stadia Maps Basemap"></l-tile-layer>
-        <GMapMarker :icon="answerIcon" :animation="1"   :position="{lat:location.lat, lng:location.lng}" v-if="answered == 1">
+                    <l-marker :lat-lng="[guess.lat, guess.lng]"></l-marker>
+                </l-map>
+</div>
+        <!-- <GMapMarker :icon="answerIcon" :animation="1"   :position="{lat:location.lat, lng:location.lng}" v-if="answered == 1">
                       <GMapInfoWindow
           :opened="true"
           :options="{
@@ -142,7 +154,7 @@ let center = ref([38, 139.69])
           <GMapPolyline v-if="answered == 1"
       :path="[{lat:form.lat, lng:form.lng}, {lat:location.lat, lng:location.lng}]"
         ref="polyline" />
-       <GMapMarker :icon="guessIcon" :animation="2" :key="componentKey"  :position="{lat:form.lat, lng:form.lng}">          </GMapMarker>
+       <GMapMarker :icon="guessIcon" :animation="2" :key="componentKey"  :position="{lat:form.lat, lng:form.lng}">          </GMapMarker> -->
            <div class="absolute right-24 top-0">
                <img class="rounded-b-3xl w-auto h-40 " :src="questions[currentQ.current].image" alt="">
            </div>
@@ -181,6 +193,6 @@ let center = ref([38, 139.69])
                   </svg>
               </Link> <br>
            </div>
-    </l-map>
+
 </GuestLayout>
   </template>
