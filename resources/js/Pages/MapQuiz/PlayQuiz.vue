@@ -78,8 +78,10 @@ const form = useForm({
   id: props.questions[currentQ.value.current].id,
 
 })
+
 function gMark(event) {
     if (answered.value == 0) {
+        componentKey.value += 1;
         form.lat = event.latLng.lat()
         form.lng = event.latLng.lng()
     }
@@ -99,6 +101,8 @@ function nextQ() {
     currentQ.value.current++
     answered.value = 0
 }
+
+const componentKey = ref(0);
 </script>
 <template class="whitespace-nowrap overflow-hidden w-24 scrollbar-none">
     <Head title="Map Quiz"/>
@@ -111,7 +115,7 @@ function nextQ() {
           <GMapPolyline v-if="answered == 1"
       :path="[{lat:form.lat, lng:form.lng}, {lat:location.lat, lng:location.lng}]"
         ref="polyline" />
-       <GMapMarker :icon="guessIcon"  :position="{lat:form.lat, lng:form.lng}">
+       <GMapMarker :icon="guessIcon" :animation="2" :key="componentKey"  :position="{lat:form.lat, lng:form.lng}">
            <div class="absolute right-24 top-0">
                <img class="rounded-b-3xl w-auto h-40 " :src="questions[currentQ.current].image" alt="">
            </div>
