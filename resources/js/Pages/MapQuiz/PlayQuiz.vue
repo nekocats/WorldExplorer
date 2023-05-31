@@ -3,6 +3,7 @@ import {Head, Link, useForm, router} from '@inertiajs/vue3'
 import {  reactive, ref, watch } from 'vue';
 import answerIcon from "./Icons/icons8-map-pin-48.png"
 import guessIcon from "./Icons/guess.png"
+import ConfettiExplosion from "vue-confetti-explosion";
 
 const props = defineProps({
     quiz: {
@@ -103,6 +104,7 @@ function nextQ() {
     <Head title="Map Quiz"/>
     <GuestLayout class="scrollbar-none">
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" class="h-screen w-screen"  @click="gMark">
+
         <GMapMarker :icon="answerIcon" :animation="1"   :position="{lat:location.lat, lng:location.lng}" v-if="answered == 1">
           </GMapMarker>
           <GMapPolyline v-if="answered == 1"
@@ -133,7 +135,9 @@ function nextQ() {
             <form @submit.prevent="submit"><button type="submit" v-if="answered == 0 && currentQ.current != questions.length" :disabled="form.processing" class="w-32 h-16  text-2xl text-white absolute flex bottom-5 justify-center inset-x-[54rem] pt-4 backdrop-blur-3xl bg-white/30  hover:bg-lime-500/30 rounded-3xl">ANSWER</button></form>
           </GMapMarker>
           <div v-if="currentQ.current == questions.length - 1 && answered == 1" class="absolute inset-1/4 flex justify-between filter backdrop-blur-md bg-gray-300/30 p-1 items-center align-center rounded-3xl">
+
               <h1 class="font-raleway box-border text-4xl text-white rounded-lg font-bold pl-24">Game over!</h1>
+              <ConfettiExplosion :particleCount="5000" v-if="currentQ.current == questions.length - 1 && answered == 1" />
               <h1 class="font-raleway box-border text-4xl text-lime-200 rounded-lg font-bold pl-24">Your score is: {{ Math.round(score) }}</h1>
               <Link data-te-toggle="tooltip" title="Back to quiz chooser" :href="route('choosequiz')" class="scrollbar-none flex text-2xl p-4  py-4 font-raleway text-white roun  ded-lg">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
