@@ -1,11 +1,12 @@
 <script setup>
 import {Head, Link, useForm, router} from '@inertiajs/vue3'
-import {  reactive, ref, watch } from 'vue';
+import {  reactive, ref, watch, onMounted } from 'vue';
 import answerIcon from "./Icons/icons8-map-pin-48.png"
 import guessIcon from "./Icons/guess.png"
 import ConfettiExplosion from "vue-confetti-explosion";
-import L from 'leaflet'
-import "leaflet/dist/leaflet.css"
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+
 import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet"
 
 
@@ -66,7 +67,7 @@ watch(
 
 const currentQ = ref({current: 0})
 
-const map = ref(null)
+
 const guess = ref({lat:null, lng:null})
 
 function mark(event) {
@@ -83,18 +84,7 @@ const form = useForm({
 
 })
 
-function gMark(event) {
-    if (answered.value == 0) {
-        componentKey.value += 1;
-        console.log(event)
-        console.log(event.view.L.CRS)
-        guess.value = event.view.L.CRS.Simple.pointToLatLng({x: event.x, y: event.y})
-        // form.lat = event.latLng.lat()
-        // form.lng = event.latLng.lng()
-    }
 
-
-  }
 function getDistance(distance) {
     if (distance > 1000) {
         return Math.round(distance / 1000) + ' km'
@@ -119,21 +109,37 @@ function nextQ() {
 const componentKey = ref(0);
 let zoom = ref(6)
 let center = ref([60, 30.69])
+let map = null
+
+onMounted(() => {
+     map = L.map('mapElement').setView([46.05, 11.05], 5);
+    L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+})
+function gMark(event) {
+    if (answered.value == 0) {
+        componentKey.value += 1;
+        const zoom = ref(map.getZoom())
+        console.log(event)
+        const coords = ref(event.view.L.CRS.Simple.pointToLatLng({x: event.x, y: event.y}, zoom.value))
+        console.log(coords.value)
+        L.marker(coords.value).addTo(map)
+        // form.lat = event.latLng.lat()
+        // form.lng = event.latLng.lng()
+    }
 
 
+  }
 
 </script>
 <template class="whitespace-nowrap overflow-hidden w-24 scrollbar-none">
     <Head title="Map Quiz"/>
     <GuestLayout class="scrollbar-none">
-        <div class="absolute h-screen w-screen -z-10">
-    <l-map ref="map" v-model:zoom="zoom" v-model:center="center"  @click.capture="gMark">
-        <l-tile-layer url="https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
+        <div id="mapElement" class="absolute h-screen w-screen -z-10" @click="gMark">
 
-                    layer-type="base"
-                    name="Stadia Maps Basemap"></l-tile-layer>
-                    <l-marker :lat-lng="[guess.lat, guess.lng]"></l-marker>
-                </l-map>
 </div>
         <!-- <GMapMarker :icon="answerIcon" :animation="1"   :position="{lat:location.lat, lng:location.lng}" v-if="answered == 1">
                       <GMapInfoWindow
