@@ -107,26 +107,28 @@ function nextQ() {
 }
 
 const componentKey = ref(0);
-let zoom = ref(6)
+const zoom = ref(6)
 let center = ref([60, 30.69])
-let map = null
+let map = ref(null)
 
 onMounted(() => {
-     map = L.map('mapElement').setView([46.05, 11.05], 5);
+     map.value = L.map('mapElement').setView([46.05, 11.05], zoom.value);
     L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
+    }).addTo(map.value);
 
 })
 function gMark(event) {
     if (answered.value == 0) {
         componentKey.value += 1;
-        const zoom = ref(map.getZoom())
+        zoom.value = ref(map.value.getZoom())
+
         console.log(event)
-        const coords = ref(event.view.L.CRS.Simple.pointToLatLng({x: event.x, y: event.y}, zoom.value))
+        console.log(zoom.value._value)
+        const coords = ref(event.view.L.CRS.Simple.pointToLatLng({x: event.x, y: event.y}, zoom.value._value))
         console.log(coords.value)
-        L.marker(coords.value).addTo(map)
+        L.marker(coords.value).addTo(map.value)
         // form.lat = event.latLng.lat()
         // form.lng = event.latLng.lng()
     }
