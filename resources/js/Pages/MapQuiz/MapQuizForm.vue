@@ -4,6 +4,9 @@ import EditForm from './Edit.vue'
 import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
+import normalIcon from "./Icons/icons8-normal.png"
+import addIcon from "./Icons/icons8-add.png"
+
 
 const props = defineProps({
     markers: {
@@ -45,7 +48,7 @@ function destroy(id) {
     <Head title="Map Quiz Edit"/>
     <AppLayout>
     <GMapMap id="vue-map" ref="myMapRef" :center="center" :zoom="10" map-type-id="hybrid" style="width: 100vw; height: 33rem" @click="mark">
-       <GMapMarker :key="marker.id" v-for="marker in markers[0].questions" :position="{lat:marker.lat, lng:marker.lng}" :clickable="true"
+       <GMapMarker :icon="normalIcon" :key="marker.id" v-for="marker in markers[0].questions" :position="{lat:marker.lat, lng:marker.lng}" :clickable="true"
           @click="openMarker(marker.id)" >
             <GMapInfoWindow
             :closeclick="true"
@@ -60,7 +63,7 @@ function destroy(id) {
         <DangerButton @click="destroy(marker.id)">DELETE</DangerButton>
         </GMapInfoWindow>
           </GMapMarker>
-          <GMapMarker  :position="{lat:form.lat, lng:form.lng}">
+          <GMapMarker  :icon="addIcon" :position="{lat:form.lat, lng:form.lng}">
           </GMapMarker>
     </GMapMap>
     <form @submit.prevent="form.post('store')">

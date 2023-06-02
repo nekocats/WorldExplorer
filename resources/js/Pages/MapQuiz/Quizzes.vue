@@ -4,6 +4,7 @@ import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import { useForm, usePage, Head, Link } from '@inertiajs/vue3';
+
 const props = defineProps({
 
     quizzes: {
