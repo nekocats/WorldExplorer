@@ -4,10 +4,6 @@ import {  reactive, ref, watch, onMounted } from 'vue';
 import answerIcon from "./Icons/icons8-map-pin-48.png"
 import guessIcon from "./Icons/guess.png"
 import ConfettiExplosion from "vue-confetti-explosion";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-
-import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet"
 
 
 const props = defineProps({
@@ -38,14 +34,14 @@ const props = defineProps({
 
 })
 
-watch(
-  () => props.location,
-  () => {
-    center.lat = props.location.lat
-    center.lng = props.location.lng
+// watch(
+//   () => props.location,
+//   () => {
+//     center.lat = props.location.lat
+//     center.lng = props.location.lng
 
-  }
-)
+//   }
+// )
 watch(
   () => props.distance,
   () => {
@@ -107,42 +103,98 @@ function nextQ() {
 }
 
 const componentKey = ref(0);
-const zoom = ref(6)
-let center = ref([60, 30.69])
-let map = ref(null)
 
-onMounted(() => {
-     map.value = L.map('mapElement').setView([46.05, 11.05], zoom.value);
-    L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map.value);
 
-})
 function gMark(event) {
     if (answered.value == 0) {
         componentKey.value += 1;
-        zoom.value = ref(map.value.getZoom())
 
+        console.log(event.coordinate)
         console.log(event)
-        console.log(zoom.value._value)
-        const coords = ref(event.view.L.CRS.Simple.pointToLatLng({x: event.x, y: event.y}, zoom.value._value))
-        console.log(coords.value)
-        L.marker(coords.value).addTo(map.value)
-        // form.lat = event.latLng.lat()
-        // form.lng = event.latLng.lng()
+
+        guess.value.lat = event.coordinate[0]
+        guess.value.lng = event.coordinate[1]
+        form.lat = event.coordinate[1]
+        form.lng = event.coordinate[0]
+        console.log(form)
     }
 
 
   }
+  const view = ref()
+  console.log(view)
+  const projection = ref("EPSG:3857");
 
 </script>
 <template class="whitespace-nowrap overflow-hidden w-24 scrollbar-none">
     <Head title="Map Quiz"/>
     <GuestLayout class="scrollbar-none">
-        <div id="mapElement" class="absolute h-screen w-screen -z-10" @click="gMark">
 
-</div>
+        <ol-map
+        @singleclick="gMark"
+    :loadTilesWhileAnimating="true"
+    :loadTilesWhileInteracting="true"
+    class="w-screen h-screen"
+  >
+    <ol-view
+      ref="view"
+      :center="[24,57]"
+      :rotation="rotation"
+      :zoom="5"
+      :projection="projection"
+    />
+
+    <ol-tile-layer>
+        <ol-source-xyz :url='"https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}@2x.png?key=TzeIF8BGsxISkLCwrVSS"' />
+    </ol-tile-layer>
+    <ol-vector-layer
+      :updateWhileAnimating="true"
+      :updateWhileInteracting="true"
+    >
+      <ol-source-vector ref="vectorsource">
+        <ol-feature>
+          <ol-geom-line-string
+            :coordinates="[
+              [guess.lat, guess.lng],
+              [location.lng, location.lat],
+            ]"
+          ></ol-geom-line-string>
+          <ol-style>
+            <ol-style-stroke
+              :color="strokeColor"
+              :width="5"
+            ></ol-style-stroke>
+          </ol-style>
+        </ol-feature>
+        <ol-animation-drop :duration="2000" :repeat="3">
+          <ol-feature v-for="index in 20" :key="index">
+            <ol-geom-point
+              :coordinates="[
+                guess.lat,
+                guess.lng,
+              ]"
+            ></ol-geom-point>
+
+            <ol-style>
+              <ol-style-icon :src="guessIcon" :anchor="[0.5,0.9]" :scale="1"></ol-style-icon>
+            </ol-style>
+          </ol-feature>
+          <ol-feature v-for="index in 20" :key="index">
+            <ol-geom-point
+              :coordinates="[
+                location.lng,
+                location.lat
+              ]"
+            ></ol-geom-point>
+
+            <ol-style>
+              <ol-style-icon :src="answerIcon" :anchor="[0.5,0.9]"  :scale="1"></ol-style-icon>
+            </ol-style>
+          </ol-feature>
+        </ol-animation-drop>
+      </ol-source-vector>
+    </ol-vector-layer>
+  </ol-map>
         <!-- <GMapMarker :icon="answerIcon" :animation="1"   :position="{lat:location.lat, lng:location.lng}" v-if="answered == 1">
                       <GMapInfoWindow
           :opened="true"
